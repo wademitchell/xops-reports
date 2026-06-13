@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Free clones: Notion, Lovable, Notebook LM + top 10 repos</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #5865f2;
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --text: #e2e5ef;
+    --muted: #8b90a0;
+    --radius: 14px;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 16px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .channel {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .yt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ff0000;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .tldr {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  ul, ol {
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  a {
+    color: var(--accent);
+    word-break: break-all;
+  }
+  .footer {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid var(--surface2);
+  }
+</style>
+</head>
+<body>
+
+<div class="badge">AI</div>
+<h1>Free clones: Notion, Lovable, Notebook LM + top 10 repos</h1>
+<div class="channel">The Next New Thing</div>
+<a class="yt-btn" href="https://www.youtube.com/watch?v=2WNl5VidRS8" target="_blank">
+  ▶ Watch on YouTube
+ </a>
+
+<div class="card"><div class="card-title">TL;DR</div><div class="tldr">Andrew Warner and guest Peter Cooper walk through this week's most popular open-source AI repos on GitHub. Headliners include a local NotebookLM clone with custom voices, a token-compression tool to fight context blowup, a Claude-based Lovable imitator you can run from your phone, and Apple's new macOS container runtime. Worth a skim for anyone tracking the agent-tooling ecosystem.</div></div>
+<div class="card"><div class="card-title">Creator's Key Callouts</div><ul><li>Riley Brown's &quot;rilable&quot; demonstrates how far Claude-powered app generation has come, but Andrew explicitly says don't replace Lovable with it yet — use it as a preview of what's now possible.</li>
+<li>Peter pushes back on taste-skill: you're trading one set of design clichés (default Claude styling) for another (their curated styles) — the real win is forking the skill files and building your own design system.</li>
+<li>On the &quot;Phantom Stars&quot; fake-engagement controversy: a third-party tool has flagged several trending repos for suspicious star patterns. Peter and Andrew are not accusing anyone, but it's a real industry issue (and apparently stars can be bought for as little as $1 per thousand).</li>
+<li>Peter recommends the &quot;last30days-skill&quot; and Agent-Reach as a complementary pair: the skill produces a finished deliverable, while Agent-Reach is the surgical underlying tool you can use inside any workflow.</li></ul></div>
+<div class="card"><div class="card-title">Ranked List</div><ol><li>. mvanhorn/last30days-skill — <a href="https://github.com/mvanhorn/last30days-skill" target="_blank">https://github.com/mvanhorn/last30days-skill</a> — #1 repo of the week, &quot;mini Gartner analyst&quot; that synthesizes recent research from hard-to-scrape sites</li>
+<li>. chopratejas/headroom — <a href="https://github.com/chopratejas/headroom" target="_blank">https://github.com/chopratejas/headroom</a> — Token-compression tools (JSON dedup, code compression) increasingly relevant as Claude's context costs balloon</li>
+<li>. lfnovo/open-notebook — <a href="https://github.com/lfnovo/open-notebook" target="_blank">https://github.com/lfnovo/open-notebook</a> — Open-source NotebookLM clone with custom voices and multi-speaker podcasts, runs locally for privacy</li>
+<li>. (Sponsor read) Zapier MCP — <a href="https://zapier.com/mcp" target="_blank">https://zapier.com/mcp</a> — Unified MCP endpoint for connecting agents to 1000+ tools</li>
+<li>. helloianneo/ian-xiaohei-illustrations — <a href="https://github.com/helloianneo/ian-xiaohei-illustrations" target="_blank">https://github.com/helloianneo/ian-xiaohei-illustrations</a> — Codex skill that converts articles into charming illustrated explainers (default Chinese, works in English)</li>
+<li>. refactoringhq/tolaria — <a href="https://github.com/refactoringhq/tolaria" target="_blank">https://github.com/refactoringhq/tolaria</a> — Free Notion-style markdown knowledge base that lives on your filesystem (Claude Code can edit files directly)</li>
+<li>. rbrown101010/rilable — <a href="https://github.com/rbrown101010/rilable" target="_blank">https://github.com/rbrown101010/rilable</a> — Riley Brown's &quot;Lovable clone built with two Claude prompts&quot; — proof-of-concept, not production-ready</li>
+<li>. phuryn/pm-skills — <a href="https://github.com/phuryn/pm-skills" target="_blank">https://github.com/phuryn/pm-skills</a> — 68 PM skills / 42 workflows; useful as a starting point even if you don't adopt the methodology wholesale</li>
+<li>. openai/plugins — <a href="https://github.com/openai/plugins" target="_blank">https://github.com/openai/plugins</a> — Official Codex plugins for Notion, Figma, Asana, Gmail, GCal; &quot;homebrew MCP&quot;</li>
+<li>0. Panniantong/Agent-Reach — <a href="https://github.com/Panniantong/Agent-Reach" target="_blank">https://github.com/Panniantong/Agent-Reach</a> — Surgical CLI for granular X/Reddit/YouTube/GitHub/LinkedIn access (Chinese social networks too)</li>
+<li>1. NVIDIA/cosmos — <a href="https://github.com/NVIDIA/cosmos" target="_blank">https://github.com/NVIDIA/cosmos</a> — World models for physical AI; less applicable to software-only builders</li>
+<li>2. Leonxlnx/taste-skill — <a href="https://github.com/Leonxlnx/taste-skill" target="_blank">https://github.com/Leonxlnx/taste-skill</a> — Design-system skill; trades one set of clichés for another, but a great starting point</li>
+<li>3. apple/container — <a href="https://github.com/apple/container" target="_blank">https://github.com/apple/container</a> — Apple's macOS Linux container runtime, teased toward full WSL-style integration</li>
+<li>4. microsoft/markitdown — <a href="https://github.com/microsoft/markitdown" target="_blank">https://github.com/microsoft/markitdown</a> — Re-entry on the list, 110k+ stars, the canonical &quot;convert anything to LLM-ready markdown&quot; tool</li></ol></div>
+<div class="card"><div class="card-title">Links Mentioned</div><ul><li><a href="https://github.com/mvanhorn/last30days-skill" target="_blank">https://github.com/mvanhorn/last30days-skill</a> — Claude skill that pulls last-30-days research from X, Reddit, YouTube and the web</li>
+<li><a href="https://github.com/chopratejas/headroom" target="_blank">https://github.com/chopratejas/headroom</a> — Token-compression layer for JSON, logs, and code to slash LLM context cost</li>
+<li><a href="https://github.com/lfnovo/open-notebook" target="_blank">https://github.com/lfnovo/open-notebook</a> — Local NotebookLM alternative with multi-speaker podcast generation</li>
+<li><a href="https://zapier.com/mcp" target="_blank">https://zapier.com/mcp</a> — Zapier MCP: a single MCP server connecting agents to 1000+ apps</li>
+<li><a href="https://github.com/helloianneo/ian-xiaohei-illustrations" target="_blank">https://github.com/helloianneo/ian-xiaohei-illustrations</a> — Codex skill that turns articles into stylized explainer illustrations</li>
+<li><a href="https://github.com/refactoringhq/tolaria" target="_blank">https://github.com/refactoringhq/tolaria</a> — Notion-style offline markdown knowledge base with AI integration</li>
+<li><a href="https://github.com/rbrown101010/rilable" target="_blank">https://github.com/rbrown101010/rilable</a> — Riley Brown's Claude-powered Lovable clone</li>
+<li><a href="https://github.com/phuryn/pm-skills" target="_blank">https://github.com/phuryn/pm-skills</a> — 68 PM skills and 42 workflows for AI project management</li>
+<li><a href="https://github.com/openai/plugins" target="_blank">https://github.com/openai/plugins</a> — Official Codex plugins for Notion, Figma, Asana, Gmail, GCal and more</li>
+<li><a href="https://github.com/Panniantong/Agent-Reach" target="_blank">https://github.com/Panniantong/Agent-Reach</a> — CLI giving agents granular access to X, Reddit, YouTube, GitHub, LinkedIn</li>
+<li><a href="https://github.com/NVIDIA/cosmos" target="_blank">https://github.com/NVIDIA/cosmos</a> — NVIDIA's open world models for robots and physical AI</li>
+<li><a href="https://github.com/Leonxlnx/taste-skill" target="_blank">https://github.com/Leonxlnx/taste-skill</a> — Design-system skill to escape generic Claude-generated websites</li>
+<li><a href="https://github.com/apple/container" target="_blank">https://github.com/apple/container</a> — Apple's macOS tool for running Linux containers as lightweight VMs</li>
+<li><a href="https://github.com/microsoft/markitdown" target="_blank">https://github.com/microsoft/markitdown</a> — Microsoft's PDF/Office/audio-to-markdown converter with MCP server</li>
+<li><a href="https://thenextnewthing.ai/l/github-weekly-june12" target="_blank">https://thenextnewthing.ai/l/github-weekly-june12</a> — Show notes and full resource list</li>
+<li><a href="https://zapier.com/" target="_blank">https://zapier.com/</a> — Episode sponsor</li>
+<li><a href="https://x.com/cooperx86" target="_blank">https://x.com/cooperx86</a> — Guest Peter Cooper on X</li>
+<li><a href="https://peterc.org/" target="_blank">https://peterc.org/</a> — Guest Peter Cooper's personal site</li>
+<li><a href="https://cooperpress.com/" target="_blank">https://cooperpress.com/</a> — CooperPress (Peter's publishing company)</li>
+<li><a href="https://javascriptweekly.com/" target="_blank">https://javascriptweekly.com/</a> — Peter Cooper's JavaScript Weekly newsletter</li></ul></div>
+
+<div class="footer">XOps • Generated Jun 13, 2026, 01:27 PM PT</div>
+
+</body>
+</html>
