@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Free clones: Notion, Lovable, Notebook LM + top 10 repos</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #5865f2;
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --text: #e2e5ef;
+    --muted: #8b90a0;
+    --radius: 14px;
+  }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 16px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .channel {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .yt-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ff0000;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 18px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--accent);
+  }
+  .card-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .tldr {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  ul, ol {
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  a {
+    color: var(--accent);
+    word-break: break-all;
+  }
+  .footer {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 12px;
+    border-top: 1px solid var(--surface2);
+  }
+</style>
+</head>
+<body>
+
+<div class="badge">AI</div>
+<h1>Free clones: Notion, Lovable, Notebook LM + top 10 repos</h1>
+<div class="channel">The Next New Thing</div>
+<a class="yt-btn" href="https://www.youtube.com/watch?v=2WNl5VidRS8" target="_blank">
+  ▶ Watch on YouTube
+ </a>
+
+<div class="card"><div class="card-title">TL;DR</div><div class="tldr">Andrew Warner and guest Peter Cooper (CooperPress) walk through the top 10 GitHub repos trending in the AI agent space this week, covering context retrieval, token compression, local podcast generation, Codex plugins, and design tools that fight the generic Claude look. A great tour of what working AI builders are actually picking up right now.</div></div>
+<div class="card"><div class="card-title">Creator's Key Callouts</div><ul><li>Peter flags that last30days-skill uses your browser cookies to scrape X and YouTube. Powerful but worth being careful with. Bring your own API keys for the safer path.</li>
+<li>Headroom's token compression is genuinely useful, especially given how fast Claude burns through context. The benchmarks are mixed on general text but solid on structured JSON and debugging tasks.</li>
+<li>Open Notebook is the real NotebookLM competitor worth watching. Multi-speaker podcast profiles and fully local model support beat Google's locked-in approach.</li>
+<li>Riley Brown's rilable (Lovable clone built with Claude) is a &quot;passion project&quot; demo, not a Lovable replacement. Use it to feel out what is now possible.</li>
+<li>PM Skills is a prompt library with real PM knowledge baked in, but read the skills, do not just take them wholesale. Steal what works.</li>
+<li>Taste Skill trades one set of design cliches for another. Peter: go in, copy the files, swap fonts and colors, and ship your own design system.</li>
+<li>Peter and Andrew flag a real &quot;fake GitHub stars&quot; market. Reports of $1,000 per repo or $1 per star via bot accounts. Worth knowing as you evaluate trending repos.</li>
+<li>MarkItDown is the quiet hero of the list. Convert PDFs and Office docs to clean markdown before sending to Claude and you can cut token usage by up to 70%.</li></ul></div>
+<div class="card"><div class="card-title">Ranked List</div><ol><li>. mvanhorn/last30days-skill — <a href="https://github.com/mvanhorn/last30days-skill" target="_blank">https://github.com/mvanhorn/last30days-skill</a> — Number one repo of the week. Pulls last 30 days of signal from X, YouTube, Reddit, and the web into a clean deliverable, even writing cold emails for you.</li>
+<li>. chopratejas/headroom — <a href="https://github.com/chopratejas/headroom" target="_blank">https://github.com/chopratejas/headroom</a> — Cuts token costs via smart JSON and code compression. Big wins on debugging and structured data, modest on free-form text.</li>
+<li>. lfnovo/open-notebook — <a href="https://github.com/lfnovo/open-notebook" target="_blank">https://github.com/lfnovo/open-notebook</a> — Local NotebookLM alternative. Multi-speaker podcasts, fully private, run on your own models. Worth the setup.</li>
+<li>. phuryn/pm-skills — <a href="https://github.com/phuryn/pm-skills" target="_blank">https://github.com/phuryn/pm-skills</a> — 68 PM skills and 42 workflows across 9 plugins. Has an interview-style command that drills you until a plan emerges.</li>
+<li>. openai/plugins — <a href="https://github.com/openai/plugins" target="_blank">https://github.com/openai/plugins</a> — Official Codex plugins for Notion, Asana, Figma, Gmail, GCal, research APIs and more. Spec-to-implementation in Claude.</li>
+<li>. Panniantong/Agent-Reach — <a href="https://github.com/Panniantong/Agent-Reach" target="_blank">https://github.com/Panniantong/Agent-Reach</a> — Granular CLI to give agents scoped read/search access to Twitter, Reddit, YouTube, GitHub, and several Chinese networks. The surgical knife under last30days.</li>
+<li>. NVIDIA/cosmos — <a href="https://github.com/NVIDIA/cosmos" target="_blank">https://github.com/NVIDIA/cosmos</a> — Open-source world models for physical AI. Robots, autonomous vehicles, smart infrastructure. Omni model handles text, movement, and images.</li>
+<li>. Leonxlnx/taste-skill — <a href="https://github.com/Leonxlnx/taste-skill" target="_blank">https://github.com/Leonxlnx/taste-skill</a> — Stops your AI-built sites from looking like generic Claude output. Swap fonts and colors to make it yours.</li>
+<li>. apple/container — <a href="https://github.com/apple/container" target="_blank">https://github.com/apple/container</a> — Apple-native lightweight Linux VMs on Apple Silicon. Deep macOS integration, the WSL moment for Mac, teased at WWDC.</li>
+<li>0. microsoft/markitdown — <a href="https://github.com/microsoft/markitdown" target="_blank">https://github.com/microsoft/markitdown</a> — Convert PDFs, Office docs, images, audio, and even YouTube videos into clean LLM-ready markdown. 110k+ stars. MCP server available.</li></ol></div>
+<div class="card"><div class="card-title">Links Mentioned</div><ul><li><a href="https://thenextnewthing.ai/l/github-weekly-june12" target="_blank">https://thenextnewthing.ai/l/github-weekly-june12</a> — Full show notes and resource hub for this episode</li>
+<li><a href="https://zapier.com/" target="_blank">https://zapier.com/</a> — Sponsor (presented by Zapier, the AI automation company)</li>
+<li><a href="https://x.com/cooperx86" target="_blank">https://x.com/cooperx86</a> — Peter Cooper on X</li>
+<li><a href="https://peterc.org/" target="_blank">https://peterc.org/</a> — Peter Cooper's personal site</li>
+<li><a href="https://cooperpress.com/" target="_blank">https://cooperpress.com/</a> — CooperPress (Peter's publishing company)</li>
+<li><a href="https://javascriptweekly.com/" target="_blank">https://javascriptweekly.com/</a> — JavaScript Weekly newsletter</li>
+<li><a href="https://github.com/mvanhorn/last30days-skill" target="_blank">https://github.com/mvanhorn/last30days-skill</a> — Last 30 Days skill repo</li>
+<li><a href="https://github.com/chopratejas/headroom" target="_blank">https://github.com/chopratejas/headroom</a> — Headroom token compression repo</li>
+<li><a href="https://github.com/lfnovo/open-notebook" target="_blank">https://github.com/lfnovo/open-notebook</a> — Open Notebook repo</li>
+<li><a href="https://github.com/helloianneo/ian-xiaohei-illustrations" target="_blank">https://github.com/helloianneo/ian-xiaohei-illustrations</a> — Ian xiaohei illustrations skill</li>
+<li><a href="https://github.com/refactoringhq/tolaria" target="_blank">https://github.com/refactoringhq/tolaria</a> — Tolaria offline markdown KB</li>
+<li><a href="https://github.com/rbrown101010/rilable" target="_blank">https://github.com/rbrown101010/rilable</a> — Rilable Claude mobile builder</li>
+<li><a href="https://github.com/phuryn/pm-skills" target="_blank">https://github.com/phuryn/pm-skills</a> — PM skills repo</li>
+<li><a href="https://github.com/openai/plugins" target="_blank">https://github.com/openai/plugins</a> — OpenAI Codex plugins</li>
+<li><a href="https://github.com/Panniantong/Agent-Reach" target="_blank">https://github.com/Panniantong/Agent-Reach</a> — Agent Reach CLI</li>
+<li><a href="https://github.com/NVIDIA/cosmos" target="_blank">https://github.com/NVIDIA/cosmos</a> — NVIDIA Cosmos world models</li>
+<li><a href="https://github.com/Leonxlnx/taste-skill" target="_blank">https://github.com/Leonxlnx/taste-skill</a> — Taste skill</li>
+<li><a href="https://github.com/apple/container" target="_blank">https://github.com/apple/container</a> — Apple container</li>
+<li><a href="https://github.com/microsoft/markitdown" target="_blank">https://github.com/microsoft/markitdown</a> — Microsoft MarkItDown</li>
+<li><a href="https://mvanhorn.com/" target="_blank">https://mvanhorn.com/</a> — Creator of last30days-skill (Matt Van Horn)</li>
+<li><a href="https://x.com/rianvroon" target="_blank">https://x.com/rianvroon</a> — A16Z</li>
+<li><a href="https://x.com/itsJustinMoore" target="_blank">https://x.com/itsJustinMoore</a> — Justine Moore (A16Z partner who highlighted xiaohei illustrations)</li>
+<li><a href="https://x.com/rileybrown" target="_blank">https://x.com/rileybrown</a> — Riley Brown, creator of rilable (Lovable clone via Claude)</li>
+<li><a href="https://x.com/timnswift" target="_blank">https://x.com/timnswift</a> — Tim Snider, Apple engineer working on container</li></ul></div>
+
+<div class="footer">XOps • Generated Jun 13, 2026, 01:11 PM PT</div>
+
+</body>
+</html>
