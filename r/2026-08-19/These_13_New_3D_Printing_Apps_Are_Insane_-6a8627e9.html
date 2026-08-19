@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>These 13 New 3D Printing Apps Are Insane!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --primary: #ff385c;
+    --primary-active: #e00b41;
+    --ink: #222222;
+    --body: #222222;
+    --muted: #6a6a6a;
+    --muted-soft: #929292;
+    --hairline: #dddddd;
+    --hairline-soft: #ebebeb;
+    --canvas: #ffffff;
+    --surface-soft: #f7f7f7;
+    --surface-strong: #f2f2f2;
+    --shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img, svg, video, iframe {
+    max-width: 100%;
+  }
+
+  p, h1, h2, h3, a, span, div {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Header */
+  .header {
+    height: 80px;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: var(--canvas);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #222222;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .logo strong {
+    font-weight: 800;
+    color: #000000;
+  }
+
+  .directory-link {
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-left: 20px;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .directory-link:hover {
+    border-color: var(--primary);
+    background: var(--surface-soft);
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    height: 48px;
+    padding: 0 8px 0 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-left: auto;
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    width: 180px;
+    padding-right: 8px;
+  }
+
+  .search-orb {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .search-orb svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+  }
+
+  /* Main Container */
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+  }
+
+  /* Title Block */
+  .title-block {
+    margin-bottom: 24px;
+  }
+
+  .title-block h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .title-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .title-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  .title-meta a {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  /* Photo Hero */
+  .hero {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 32px;
+    aspect-ratio: 2.8 / 1;
+    background: var(--surface-soft);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .guest-favorite-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--canvas);
+    border-radius: 9999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: lowercase;
+  }
+
+  .guest-favorite-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
+  }
+
+  .main-content, .reservation-sidebar, .author-info, .callout-body, .review-item, .review-rank, .lk span {
+    min-width: 0;
+  }
+
+  .main-content {
+    max-width: 100%;
+  }
+
+  /* Left Column */
+  .main-content section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .main-content section:first-of-type {
+    padding-top: 0;
+  }
+
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .author-info h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .author-info p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+  }
+
+  /* TL;DR Pull */
+  .tldr-text {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Key Callouts */
+  .section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .callouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .callout-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .callout-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--ink);
+    flex: none;
+  }
+
+  .callout-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+
+  .callout-body h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .callout-body p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Ranked List as Reviews */
+  .reviews-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .review-item {
+    padding: 24px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .review-rank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .review-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    display: grid;
+    place-items: center;
+  }
+
+  .review-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .review-desc {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .review-link img {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+  }
+
+  /* Links Grid */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 12px;
+  }
+
+  .lk {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 13px 14px;
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .lk:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  .lk img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 2px;
+    flex: none;
+    background: #fff;
+  }
+
+  .lk .lk-desc {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.45;
+    display: block;
+  }
+
+  .lk .lk-dom {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* Right Column (Sticky Reservation) */
+  .reservation-sidebar {
+    position: sticky;
+    top: 112px;
+  }
+
+  .reservation-card {
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .res-selectors {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .res-cell {
+    padding: 12px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .res-cell:last-child {
+    border-bottom: none;
+  }
+
+  .res-cell label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .res-cell div {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  .res-btn {
+    width: 100%;
+    height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .res-btn:hover {
+    background: var(--primary-active);
+  }
+
+  .res-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--hairline);
+    padding: 48px 40px;
+    margin-top: 80px;
+    font-size: 16px;
+    color: var(--muted);
+    background: var(--canvas);
+  }
+
+  .footer-bottom {
+    max-width: 1560px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  @media(max-width:960px){
+    body {
+      font-size: 16px;
+    }
+    .container {
+      padding: 18px 18px 56px;
+    }
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+    .reservation-sidebar {
+      position: static;
+    }
+    .header {
+      padding: 0 16px;
+      height: 64px;
+    }
+    .title-block h1 {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.15;
+    }
+    .author-row {
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .author-info h2 {
+      font-size: clamp(22px, 7vw, 30px);
+    }
+    .tldr-text {
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    .section-title {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.18;
+    }
+    .callout-item {
+      gap: 14px;
+    }
+    .callout-body p {
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    .links {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .footer {
+      padding: 32px 18px;
+    }
+    .footer-bottom {
+      display: block;
+    }
+    .directory-link {
+      margin-left: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    .search-bar span {
+      display: none;
+    }
+    .search-bar {
+      padding-left: 16px;
+    }
+  }
+
+  @media(max-width:430px){
+    .container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .directory-link {
+      font-size: 0;
+      padding: 8px 10px;
+    }
+    .directory-link::after {
+      content: 'Library';
+      font-size: 13px;
+    }
+    .search-bar {
+      display: none;
+    }
+    .hero {
+      aspect-ratio: 16 / 9;
+    }
+    .author-avatar {
+      display: none;
+    }
+    .callout-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="logo" href="https://wademitchell.github.io/xops-reports/" aria-label="XOps YouTube Digest Library">
+    <span>X<strong>|</strong>Ops</span>
+  </a>
+  <a class="directory-link" href="https://wademitchell.github.io/xops-reports/">All digests</a>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search skills...">
+    <div class="search-orb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="title-block">
+    <h1>These 13 New 3D Printing Apps Are Insane!</h1>
+    <div class="title-meta">
+      <a href="#ranked">13 ranked picks</a>
+      <div class="dot"></div>
+      <a href="#links">13 links</a>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-img" style="background-image:url('https://i.ytimg.com/vi/K3Fmc98ug2I/maxresdefault.jpg')"></div>
+    <div class="guest-favorite-badge">
+      <span></span>#3d-printing
+    </div>
+  </div>
+  <div class="grid">
+    <main class="main-content">
+      <section id="tldr">
+  <div class="author-row" style="margin-bottom: 24px;">
+    <div class="author-info">
+      <h2>Video digest hosted by The Next Layer</h2>
+      <p>4 min read time</p>
+    </div>
+    <div class="author-avatar">🤖</div>
+  </div>
+  <p class="tldr-text">The creator tours 13 newer 3D-printing tools spanning AI-assisted Gridfinity organizers, model-texture and color workflows, mobile and AI slicers, and filament databases. His strongest practical picks are Tooltrace for photo-to-Gridfinity trays, Prusa EasyPrint for everyday mobile slicing, and 3D Filament Profiles for filament research and inventory; he is much more cautious about GridPilot, JusPrin, and preFlight.</p>
+</section>
+<section id="callouts">
+  <h2 class="section-title">What this video offers</h2>
+  <div class="callouts-list">
+    <div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>Tooltrace moved to the top of the creator's Gridfinity recommendations after recent improvements to its AI tracing, automatic bin sizing, multi-tool workflow, and interface. He describes the Pro tier as about $8/month and says the free tier is useful.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>GridPilot offers more granular controls but is still buggy and clunkier. The creator encourages feedback and says its creator has been responsive.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>Tracefinity is a strong open-source, locally runnable alternative with more customization options.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>BumpMesh can make models much more visually interesting, but detailed textures can multiply print time by two to three times or more.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>Prusa EasyPrint covers roughly 80% of ordinary slicing needs and is the creator's default away from his office; he says it is best for supported printers and routine models rather than advanced tuning.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>JusPrin's AI settings were mostly logical in testing but overdid infill, perimeters, and supports. The creator would currently recommend it mainly as a beginner learning tool.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>FullSpectrum can use dithering to create many perceived colors, but the creator says a toolchanger makes the workflow much more practical.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>preFlight advertises interesting advanced features, but the creator found profile migration and the interface disappointing and returned to OrcaSlicer.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>3D Filament Profiles is his standout filament resource, with over 26,000 filaments, 48 material types, nearly 1,000 brands, settings, data sheets, color data, labels, and personal inventory tools.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>FiLibrary is the creator's early-stage reference site for understanding filament types, strengths, weaknesses, and real-world examples.</p>
+  </div>
+</div>
+  </div>
+</section>
+<section id="ranked">
+  <h2 class="section-title">13 Ranked picks</h2>
+  <div class="reviews-grid">
+    <div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">1</span>
+      <h3>Tooltrace.ai</h3>
+    </div>
+    <span class="rating-pill"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 5.0</span>
+  </div>
+  <p class="review-desc">AI photo-to-Gridfinity tool tracing; creator's current top pick for this type of bin.</p>
+  <a class="review-link" href="https://www.tooltrace.ai/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=tooltrace.ai&amp;sz=64" alt="" loading="lazy">tooltrace.ai</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">2</span>
+      <h3>GridPilot</h3>
+    </div>
+    <span class="rating-pill"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 4.9</span>
+  </div>
+  <p class="review-desc">AI Gridfinity bin generator with more granular controls, but still buggy and clunky in the creator's test.</p>
+  <a class="review-link" href="https://gridpilot.us/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=gridpilot.us&amp;sz=64" alt="" loading="lazy">gridpilot.us</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">3</span>
+      <h3>Tracefinity</h3>
+    </div>
+    <span class="rating-pill"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> 4.8</span>
+  </div>
+  <p class="review-desc">Open-source, self-hostable option with extra cutout customization.</p>
+  <a class="review-link" href="https://tracefinity.net/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=tracefinity.net&amp;sz=64" alt="" loading="lazy">tracefinity.net</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">4</span>
+      <h3>Gridfinity FeatureScript for Onshape</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">Creator's preferred workflow for more complex 3D-fit bins and public CAD models.</p>
+  <a class="review-link" href="https://jle.vi/onshape" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=jle.vi&amp;sz=64" alt="" loading="lazy">jle.vi</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">5</span>
+      <h3>Gridfinity Generator by PerplexingLabs</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">Established free general-purpose generator for bins, baseplates, cases, and storage systems.</p>
+  <a class="review-link" href="https://gridfinity.perplexinglabs.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=gridfinity.perplexinglabs.com&amp;sz=64" alt="" loading="lazy">gridfinity.perplexinglabs.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">6</span>
+      <h3>GridFinityGenerator.com</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">Newer, visually modern generator with flexible element-based bin customization.</p>
+  <a class="review-link" href="https://gridfinitygenerator.com/en" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=gridfinitygenerator.com&amp;sz=64" alt="" loading="lazy">gridfinitygenerator.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">7</span>
+      <h3>BumpMesh</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">Adds detailed textures to STL models; useful but can substantially extend print time.</p>
+  <a class="review-link" href="https://bumpmesh.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=bumpmesh.com&amp;sz=64" alt="" loading="lazy">bumpmesh.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">8</span>
+      <h3>Prime3D</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">Paints models with gradients, photos, and dithered color effects.</p>
+  <a class="review-link" href="https://primed3d.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=primed3d.com&amp;sz=64" alt="" loading="lazy">primed3d.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">9</span>
+      <h3>Prusa EasyPrint</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">Web and mobile slicer the creator recommends for convenient everyday use.</p>
+  <a class="review-link" href="https://www.printables.com/slice" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=printables.com&amp;sz=64" alt="" loading="lazy">printables.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">10</span>
+      <h3>JusPrin by Obico</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">AI-assisted OrcaSlicer fork; promising for beginners but not yet a one-click solution for advanced users.</p>
+  <a class="review-link" href="https://jle.vi/obico" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=jle.vi&amp;sz=64" alt="" loading="lazy">jle.vi</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">11</span>
+      <h3>Snapmaker Orca FullSpectrum</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">Dithering-focused slicer fork for multicolor effects.</p>
+  <a class="review-link" href="https://github.com/ratdoux/OrcaSlicer-FullSpectrum" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">12</span>
+      <h3>preFlight</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">PrusaSlicer-derived advanced slicer that the creator personally did not keep using.</p>
+  <a class="review-link" href="https://preflight3d.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=preflight3d.com&amp;sz=64" alt="" loading="lazy">preflight3d.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">13</span>
+      <h3>3D Filament Profiles</h3>
+    </div>
+    
+  </div>
+  <p class="review-desc">Extensive filament discovery, specification, color, and inventory platform.</p>
+  <a class="review-link" href="https://3dfilamentprofiles.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=3dfilamentprofiles.com&amp;sz=64" alt="" loading="lazy">3dfilamentprofiles.com</a>
+</div>
+  </div>
+</section>
+<section id="links">
+  <h2 class="section-title">All Links Mentioned</h2>
+  <div class="links">
+    <a class="lk" href="https://www.tooltrace.ai/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=tooltrace.ai&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">AI-assisted photo-to-Gridfinity custom bin generator.</span><span class="lk-dom">tooltrace.ai</span></span></a>
+<a class="lk" href="https://gridpilot.us/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=gridpilot.us&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">AI tool-tracing Gridfinity bin service with more manual control.</span><span class="lk-dom">gridpilot.us</span></span></a>
+<a class="lk" href="https://tracefinity.net/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=tracefinity.net&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Open-source, self-hostable Gridfinity cutout generator.</span><span class="lk-dom">tracefinity.net</span></span></a>
+<a class="lk" href="https://github.com/tracefinity/tracefinity" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Tracefinity source code.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://gridfinity.perplexinglabs.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=gridfinity.perplexinglabs.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Free Gridfinity, baseplate, and storage-system generator.</span><span class="lk-dom">gridfinity.perplexinglabs.com</span></span></a>
+<a class="lk" href="https://gridfinitygenerator.com/en" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=gridfinitygenerator.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Modern Gridfinity box generator.</span><span class="lk-dom">gridfinitygenerator.com</span></span></a>
+<a class="lk" href="https://bumpmesh.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=bumpmesh.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Applies textures to STL models.</span><span class="lk-dom">bumpmesh.com</span></span></a>
+<a class="lk" href="https://primed3d.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=primed3d.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Model painting, gradients, photos, and dithering workflow.</span><span class="lk-dom">primed3d.com</span></span></a>
+<a class="lk" href="https://www.printables.com/slice" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=printables.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Prusa EasyPrint web and mobile slicer.</span><span class="lk-dom">printables.com</span></span></a>
+<a class="lk" href="https://github.com/ratdoux/OrcaSlicer-FullSpectrum" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Snapmaker Orca FullSpectrum slicer fork.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://preflight3d.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=preflight3d.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Advanced PrusaSlicer-derived slicer.</span><span class="lk-dom">preflight3d.com</span></span></a>
+<a class="lk" href="https://3dfilamentprofiles.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=3dfilamentprofiles.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Filament data, settings, color, and inventory database.</span><span class="lk-dom">3dfilamentprofiles.com</span></span></a>
+<a class="lk" href="https://filament.thenextlayer.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=filament.thenextlayer.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator's FiLibrary filament learning resource.</span><span class="lk-dom">filament.thenextlayer.com</span></span></a>
+  </div>
+</section>
+    </main>
+    <aside class="reservation-sidebar">
+      <div class="reservation-card">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--ink);">XOps Integration Status</h3>
+        <div class="res-selectors" style="margin-bottom: 16px;">
+          <div class="res-cell">
+            <label>Video Title</label>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">These 13 New 3D Printing Apps Are Insane!</div>
+          </div>
+          <div class="res-cell">
+            <label>Channel</label>
+            <div style="color: var(--ink);">The Next Layer</div>
+          </div>
+        </div>
+        <div class="recommendations-list" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+          <div style="font-size: 13px; color: var(--muted); padding: 8px 0;">No matching XOps integration recommendations found in this digest.</div>
+        </div>
+        <a class="res-btn" href="https://www.youtube.com/watch?v=K3Fmc98ug2I" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Watch on YouTube
+        </a>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-bottom">
+    <div>© 2026 XOps Report • Generated Aug 19, 2026, 03:02 PM PT</div>
+  </div>
+</footer>
+<script>
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.callout-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+      document.querySelectorAll('.review-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.lk').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+    });
+  }
+</script>
+</body>
+</html>
