@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Top 5 ways to generate Gridfinity models for FREE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --primary: #ff385c;
+    --primary-active: #e00b41;
+    --ink: #222222;
+    --body: #222222;
+    --muted: #6a6a6a;
+    --muted-soft: #929292;
+    --hairline: #dddddd;
+    --hairline-soft: #ebebeb;
+    --canvas: #ffffff;
+    --surface-soft: #f7f7f7;
+    --surface-strong: #f2f2f2;
+    --shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img, svg, video, iframe {
+    max-width: 100%;
+  }
+
+  p, h1, h2, h3, a, span, div {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Header */
+  .header {
+    height: 80px;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: var(--canvas);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #222222;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .logo strong {
+    font-weight: 800;
+    color: #000000;
+  }
+
+  .directory-link {
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-left: 20px;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .directory-link:hover {
+    border-color: var(--primary);
+    background: var(--surface-soft);
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    height: 48px;
+    padding: 0 8px 0 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-left: auto;
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    width: 180px;
+    padding-right: 8px;
+  }
+
+  .search-orb {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .search-orb svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+  }
+
+  /* Main Container */
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+  }
+
+  /* Title Block */
+  .title-block {
+    margin-bottom: 24px;
+  }
+
+  .title-block h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .title-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .title-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  .title-meta a {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  /* Photo Hero */
+  .hero {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 32px;
+    aspect-ratio: 2.8 / 1;
+    background: var(--surface-soft);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .guest-favorite-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--canvas);
+    border-radius: 9999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: lowercase;
+  }
+
+  .guest-favorite-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
+  }
+
+  .main-content, .reservation-sidebar, .author-info, .callout-body, .review-item, .review-rank, .lk span {
+    min-width: 0;
+  }
+
+  .main-content {
+    max-width: 100%;
+  }
+
+  /* Left Column */
+  .main-content section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .main-content section:first-of-type {
+    padding-top: 0;
+  }
+
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .author-info h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .author-info p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+  }
+
+  .candidate-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .candidate-table caption { text-align: left; color: var(--muted); margin-bottom: 12px; }
+  .candidate-table th, .candidate-table td { border: 1px solid var(--hairline); padding: 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; line-height: 1.6; }
+  .candidate-table thead { background: var(--surface-soft); }
+  @media (max-width: 600px) {
+    .candidate-table { font-size: 12px; }
+    .candidate-table th, .candidate-table td { padding: 6px; }
+  }
+  .digest-detail { line-height: 1.75; margin: 0 0 18px; }
+  #source-basis { color: var(--muted); font-size: 14px; }
+  #relevance { border-left: 3px solid var(--primary); padding-left: 20px; }
+
+  /* TL;DR Pull */
+  .tldr-text {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Key Callouts */
+  .section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .callouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .callout-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .callout-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--ink);
+    flex: none;
+  }
+
+  .callout-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+
+  .callout-body h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .callout-body p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Ranked List as Reviews */
+  .reviews-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .review-item {
+    padding: 24px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .review-rank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .review-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    display: grid;
+    place-items: center;
+  }
+
+  .review-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .review-desc {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .review-link img {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+  }
+
+  /* Links Grid */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 12px;
+  }
+
+  .lk {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 13px 14px;
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .lk:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  .lk img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 2px;
+    flex: none;
+    background: #fff;
+  }
+
+  .lk .lk-desc {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.45;
+    display: block;
+  }
+
+  .lk .lk-dom {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* Right Column (Sticky Reservation) */
+  .reservation-sidebar {
+    position: sticky;
+    top: 112px;
+  }
+
+  .reservation-card {
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .res-selectors {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .res-cell {
+    padding: 12px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .res-cell:last-child {
+    border-bottom: none;
+  }
+
+  .res-cell label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .res-cell div {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  .res-btn {
+    width: 100%;
+    height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .res-btn:hover {
+    background: var(--primary-active);
+  }
+
+  .res-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--hairline);
+    padding: 48px 40px;
+    margin-top: 80px;
+    font-size: 16px;
+    color: var(--muted);
+    background: var(--canvas);
+  }
+
+  .footer-bottom {
+    max-width: 1560px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  @media(max-width:960px){
+    body {
+      font-size: 16px;
+    }
+    .container {
+      padding: 18px 18px 56px;
+    }
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+    .reservation-sidebar {
+      position: static;
+    }
+    .header {
+      padding: 0 16px;
+      height: 64px;
+    }
+    .title-block h1 {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.15;
+    }
+    .author-row {
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .author-info h2 {
+      font-size: clamp(22px, 7vw, 30px);
+    }
+    .tldr-text {
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    .section-title {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.18;
+    }
+    .callout-item {
+      gap: 14px;
+    }
+    .callout-body p {
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    .links {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .footer {
+      padding: 32px 18px;
+    }
+    .footer-bottom {
+      display: block;
+    }
+    .directory-link {
+      margin-left: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    .search-bar span {
+      display: none;
+    }
+    .search-bar {
+      padding-left: 16px;
+    }
+  }
+
+  @media(max-width:430px){
+    .container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .directory-link {
+      font-size: 0;
+      padding: 8px 10px;
+    }
+    .directory-link::after {
+      content: 'Library';
+      font-size: 13px;
+    }
+    .search-bar {
+      display: none;
+    }
+    .hero {
+      aspect-ratio: 16 / 9;
+    }
+    .author-avatar {
+      display: none;
+    }
+    .callout-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="logo" href="https://wademitchell.github.io/xops-reports/" aria-label="XOps YouTube Digest Library">
+    <span>X<strong>|</strong>Ops</span>
+  </a>
+  <a class="directory-link" href="https://wademitchell.github.io/xops-reports/">All digests</a>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search this digest...">
+    <div class="search-orb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="title-block">
+    <h1>Top 5 ways to generate Gridfinity models for FREE</h1>
+    <div class="title-meta">
+      <a href="#key-ideas">Key ideas</a><span class="dot"></span><a href="#ranked">Items covered (not ranked)</a><span class="dot"></span><a href="#relevance">For you</a><span class="dot"></span><a href="#repo-readiness">Repo readiness</a><span class="dot"></span><a href="#comparison">Compare candidates</a><span class="dot"></span><a href="#try-next">Try next</a><span class="dot"></span><a href="#links">5 resources</a>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-img" style="background-image:url('https://i.ytimg.com/vi/e7h4w56yacc/maxresdefault.jpg')"></div>
+    <div class="guest-favorite-badge">
+      <span></span>#3d-printing
+    </div>
+  </div>
+  <div class="grid">
+    <main class="main-content">
+      <section id="tldr">
+  <div class="author-row" style="margin-bottom: 24px;">
+    <div class="author-info">
+      <h2>Video by Kello Labs</h2>
+      <p>4 min read time</p>
+    </div>
+    <div class="author-avatar">🤖</div>
+  </div>
+  <p class="tldr-text">The creator presents five no-cost ways to produce custom Gridfinity bins, base plates, organizers, labels, and related designs without hunting for a pre-made model. The confirmed list runs from browser generators to Fusion 360 and FreeCAD workflows; detailed strengths and the creator's final preference are not verifiable because captions and native video notes were unavailable.</p>
+</section>
+<section id="source-basis"><h2 class="section-title">Source basis</h2><p class="digest-detail">Metadata only: the description identifies five tools and timestamped chapters. Captions failed and native video understanding was unavailable. Official pages and the FreeCAD repository were independently checked.</p></section>
+<section id="key-ideas"><h2 class="section-title">Key ideas</h2><p class="digest-detail">The video focuses on generating custom Gridfinity geometry, not merely downloading models, with customization called out for sizes, compartments, labels, and magnets.</p><p class="digest-detail">The listed options cover browser-first generation plus CAD add-ons, which implies a tradeoff between speed and parametric control.</p><p class="digest-detail">The chapters allocate time to Perplexing Labs, a Fusion 360 plug-in, GridfinityGenerator.com, a FreeCAD workbench, and Gridfinity Extended.</p></section>
+<section id="callouts">
+  <h2 class="section-title">Creator&#39;s key callouts</h2>
+  <div class="callouts-list">
+    <div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p><a href="https://gridfinity.perplexinglabs.com/" target="_blank" rel="noopener">Perplexing Labs' Generator</a> appears at 00:25.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>The <a href="https://apps.autodesk.com/FUSION/en/Detail/Index?id=7197558650811789" target="_blank" rel="noopener">Fusion 360 Gridfinity Plugin</a> appears at 01:01.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p><a href="https://gridfinitygenerator.com/" target="_blank" rel="noopener">Gridfinity Generator</a> appears at 03:19.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p><a href="https://github.com/Stu142/FreeCAD-Gridfinity-Workbench" target="_blank" rel="noopener">FreeCAD Gridfinity Workbench</a> appears at 06:01.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p><a href="https://makerworld.com/en/models/481168-gridfinity-extended" target="_blank" rel="noopener">Gridfinity Extended</a> appears at 08:13.</p>
+  </div>
+</div>
+  </div>
+</section>
+<section id="ranked">
+  <h2 class="section-title">Items covered (not ranked)</h2>
+  <div class="reviews-grid">
+    <div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Perplexing Labs Generator</h3>
+    </div>
+  </div>
+  <p class="review-desc"><a href="https://gridfinity.perplexinglabs.com/" target="_blank" rel="noopener">official page</a> - browser-accessible Gridfinity and related storage systems; the page lists Gridfinity Rebuilt, Extended, and other components. Creator chapter: 00:25.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Fusion 360 Gridfinity Plugin</h3>
+    </div>
+  </div>
+  <p class="review-desc"><a href="https://apps.autodesk.com/FUSION/en/Detail/Index?id=7197558650811789" target="_blank" rel="noopener">Autodesk App Store</a> - creator-provided Fusion workflow. Creator chapter: 01:01. Detailed compatibility and licensing were not verified in this run.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Gridfinity Generator</h3>
+    </div>
+  </div>
+  <p class="review-desc"><a href="https://gridfinitygenerator.com/" target="_blank" rel="noopener">official page</a> - free interactive browser tool that lets users create boxes, baseplates, and cutouts and export STL files. Creator chapter: 03:19.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>FreeCAD Gridfinity Workbench</h3>
+    </div>
+  </div>
+  <p class="review-desc"><a href="https://github.com/Stu142/FreeCAD-Gridfinity-Workbench" target="_blank" rel="noopener">GitHub repository</a> - parametric bins and baseplates in FreeCAD. Creator chapter: 06:01.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Gridfinity Extended</h3>
+    </div>
+  </div>
+  <p class="review-desc"><a href="https://makerworld.com/en/models/481168-gridfinity-extended" target="_blank" rel="noopener">MakerWorld model</a> - creator-provided model/tool link for distinctive designs such as battery holders. Creator chapter: 08:13.</p>
+  
+</div>
+  </div>
+</section>
+<section id="relevance"><h2 class="section-title">Why it matters to you - RA assessment</h2><p class="digest-detail">Try: A browser generator is the lowest-friction entry for a simple organizer, while the FreeCAD workbench is the more defensible path if you expect repeated parametric edits. The tradeoff is setup and CAD learning versus fast, constrained generation.</p></section>
+<section id="repo-readiness"><h2 class="section-title">Repo readiness - RA assessment</h2><p class="digest-detail">FreeCAD Gridfinity Workbench - Trial with caveats, checked 2026-09-15. Maintenance: repository was publicly reachable, but release and recent-issue activity were not verified in this bounded check. Docs/setup: README documents installation through FreeCAD's built-in Addon Manager and states version 0.8.0+ was verified on FreeCAD 1.0. License: LGPL-2.1, shown on the repository. Blockers: issue review was not completed, so platform-specific problems remain unverified.</p></section>
+<section id="comparison"><h2 class="section-title">Candidate comparison - RA assessment</h2><p class="digest-detail">Decision: Choose a generator for a first custom drawer/bin versus a CAD-integrated tool for repeatable parametric work. Known criterion: low-friction custom Gridfinity generation. Inferred criterion: keeping local editing control when designs need revision. Current approach is not established from available context.</p><table class="candidate-table"><caption>Shortlist against your needs - RA assessment</caption><thead><tr><th scope="col">Criterion</th><th scope="col"><a href="https://gridfinitygenerator.com/" target="_blank" rel="noopener">Gridfinity Generator</a></th><th scope="col"><a href="https://github.com/Stu142/FreeCAD-Gridfinity-Workbench" target="_blank" rel="noopener">FreeCAD Gridfinity Workbench</a></th></tr></thead><tbody><tr><th scope="row">Access and output</th><td>Free interactive browser tool; boxes, baseplates, cutouts, and STL export are documented.</td><td>FreeCAD workbench; parametric bins and baseplates are documented.</td></tr><tr><th scope="row">Revision model</th><td>Browser editor, with saved models offered as a subscription feature.</td><td>Parametric editing inside FreeCAD; requires FreeCAD.</td></tr><tr><th scope="row">Setup</th><td>No desktop CAD prerequisite verified from its official page.</td><td>README recommends FreeCAD's Addon Manager; FreeCAD 1.0 support is documented for version 0.8.0+.</td></tr><tr><th scope="row">License</th><td>Not verified.</td><td>LGPL-2.1 shown in repository metadata.</td></tr></tbody></table><p class="digest-detail">Recommendation: Start with Gridfinity Generator for one-off bins because the official page documents immediate STL export with less setup. Prefer the FreeCAD workbench when the design needs repeated parametric adjustment; its decisive advantage is local CAD control. The unresolved issue/activity check could change confidence in the workbench.</p></section>
+<section id="try-next"><h2 class="section-title">Try next</h2><p class="digest-detail">Make one 2x3 drawer bin in Gridfinity Generator and print a fit test. Success: the grid footprint and intended contents fit without redesign.</p><p class="digest-detail">If you need multiple variants, repeat the same bin in FreeCAD and confirm that changing dimensions preserves the features you care about.</p></section>
+<section id="caveats"><h2 class="section-title">Caveats</h2><p class="digest-detail">The title says &quot;Top 5,&quot; but available metadata cannot establish a ranked order or a winner.</p><p class="digest-detail">Creator commentary and detailed demonstrations were unavailable, so this page does not treat the listed tools as independently performance-tested.</p></section>
+<section id="links">
+  <h2 class="section-title">Useful links</h2>
+  <div class="links">
+    <a class="lk" href="https://gridfinity.perplexinglabs.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=gridfinity.perplexinglabs.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">browser-accessible Gridfinity systems.</span><span class="lk-dom">gridfinity.perplexinglabs.com</span></span></a>
+<a class="lk" href="https://gridfinitygenerator.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=gridfinitygenerator.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">interactive STL generator.</span><span class="lk-dom">gridfinitygenerator.com</span></span></a>
+<a class="lk" href="https://github.com/Stu142/FreeCAD-Gridfinity-Workbench" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">parametric FreeCAD workbench.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://apps.autodesk.com/FUSION/en/Detail/Index?id=7197558650811789" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=apps.autodesk.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Fusion 360 plug-in listing.</span><span class="lk-dom">apps.autodesk.com</span></span></a>
+<a class="lk" href="https://makerworld.com/en/models/481168-gridfinity-extended" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=makerworld.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Gridfinity Extended resource.</span><span class="lk-dom">makerworld.com</span></span></a>
+  </div>
+</section>
+    </main>
+    <aside class="reservation-sidebar">
+      <div class="reservation-card">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--ink);">About this video</h3>
+        <div class="res-selectors" style="margin-bottom: 16px;">
+          <div class="res-cell">
+            <label>Video Title</label>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Top 5 ways to generate Gridfinity models for FREE</div>
+          </div>
+          <div class="res-cell">
+            <label>Channel</label>
+            <div style="color: var(--ink);">Kello Labs</div>
+          </div>
+        </div>
+        <div class="recommendations-list" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+          
+        </div>
+        <a class="res-btn" href="https://www.youtube.com/watch?v=e7h4w56yacc" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Watch on YouTube
+        </a>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-bottom">
+    <div>© 2026 XOps Report • Generated Sep 15, 2026, 08:50 AM PT</div>
+  </div>
+</footer>
+<script>
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.callout-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+      document.querySelectorAll('.digest-detail').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.review-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.lk').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+    });
+  }
+</script>
+</body>
+</html>
