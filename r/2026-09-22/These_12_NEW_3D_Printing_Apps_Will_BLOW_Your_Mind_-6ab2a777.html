@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>These 12 NEW 3D Printing Apps Will BLOW Your Mind!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --primary: #ff385c;
+    --primary-active: #e00b41;
+    --ink: #222222;
+    --body: #222222;
+    --muted: #6a6a6a;
+    --muted-soft: #929292;
+    --hairline: #dddddd;
+    --hairline-soft: #ebebeb;
+    --canvas: #ffffff;
+    --surface-soft: #f7f7f7;
+    --surface-strong: #f2f2f2;
+    --shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img, svg, video, iframe {
+    max-width: 100%;
+  }
+
+  p, h1, h2, h3, a, span, div {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Header */
+  .header {
+    height: 80px;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: var(--canvas);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #222222;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .logo strong {
+    font-weight: 800;
+    color: #000000;
+  }
+
+  .directory-link {
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-left: 20px;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .directory-link:hover {
+    border-color: var(--primary);
+    background: var(--surface-soft);
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    height: 48px;
+    padding: 0 8px 0 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-left: auto;
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    width: 180px;
+    padding-right: 8px;
+  }
+
+  .search-orb {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .search-orb svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+  }
+
+  /* Main Container */
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+  }
+
+  /* Title Block */
+  .title-block {
+    margin-bottom: 24px;
+  }
+
+  .title-block h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .title-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .title-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  .title-meta a {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  /* Photo Hero */
+  .hero {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 32px;
+    aspect-ratio: 2.8 / 1;
+    background: var(--surface-soft);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .guest-favorite-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--canvas);
+    border-radius: 9999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: lowercase;
+  }
+
+  .guest-favorite-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
+  }
+
+  .main-content, .reservation-sidebar, .author-info, .callout-body, .review-item, .review-rank, .lk span {
+    min-width: 0;
+  }
+
+  .main-content {
+    max-width: 100%;
+  }
+
+  /* Left Column */
+  .main-content section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .main-content section:first-of-type {
+    padding-top: 0;
+  }
+
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .author-info h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .author-info p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+  }
+
+  .candidate-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .candidate-table caption { text-align: left; color: var(--muted); margin-bottom: 12px; }
+  .candidate-table th, .candidate-table td { border: 1px solid var(--hairline); padding: 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; line-height: 1.6; }
+  .candidate-table thead { background: var(--surface-soft); }
+  @media (max-width: 600px) {
+    .candidate-table { font-size: 12px; }
+    .candidate-table th, .candidate-table td { padding: 6px; }
+  }
+  .digest-detail { line-height: 1.75; margin: 0 0 18px; }
+  #source-basis { color: var(--muted); font-size: 14px; }
+  #relevance { border-left: 3px solid var(--primary); padding-left: 20px; }
+
+  /* TL;DR Pull */
+  .tldr-text {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Key Callouts */
+  .section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .callouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .callout-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .callout-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--ink);
+    flex: none;
+  }
+
+  .callout-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+
+  .callout-body h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .callout-body p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Ranked List as Reviews */
+  .reviews-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .review-item {
+    padding: 24px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .review-rank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .review-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    display: grid;
+    place-items: center;
+  }
+
+  .review-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .review-desc {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .review-link img {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+  }
+
+  /* Links Grid */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 12px;
+  }
+
+  .lk {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 13px 14px;
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .lk:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  .lk img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 2px;
+    flex: none;
+    background: #fff;
+  }
+
+  .lk .lk-desc {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.45;
+    display: block;
+  }
+
+  .lk .lk-dom {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* Right Column (Sticky Reservation) */
+  .reservation-sidebar {
+    position: sticky;
+    top: 112px;
+  }
+
+  .reservation-card {
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .res-selectors {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .res-cell {
+    padding: 12px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .res-cell:last-child {
+    border-bottom: none;
+  }
+
+  .res-cell label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .res-cell div {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  .res-btn {
+    width: 100%;
+    height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .res-btn:hover {
+    background: var(--primary-active);
+  }
+
+  .res-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--hairline);
+    padding: 48px 40px;
+    margin-top: 80px;
+    font-size: 16px;
+    color: var(--muted);
+    background: var(--canvas);
+  }
+
+  .footer-bottom {
+    max-width: 1560px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  @media(max-width:960px){
+    body {
+      font-size: 16px;
+    }
+    .container {
+      padding: 18px 18px 56px;
+    }
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+    .reservation-sidebar {
+      position: static;
+    }
+    .header {
+      padding: 0 16px;
+      height: 64px;
+    }
+    .title-block h1 {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.15;
+    }
+    .author-row {
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .author-info h2 {
+      font-size: clamp(22px, 7vw, 30px);
+    }
+    .tldr-text {
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    .section-title {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.18;
+    }
+    .callout-item {
+      gap: 14px;
+    }
+    .callout-body p {
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    .links {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .footer {
+      padding: 32px 18px;
+    }
+    .footer-bottom {
+      display: block;
+    }
+    .directory-link {
+      margin-left: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    .search-bar span {
+      display: none;
+    }
+    .search-bar {
+      padding-left: 16px;
+    }
+  }
+
+  @media(max-width:430px){
+    .container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .directory-link {
+      font-size: 0;
+      padding: 8px 10px;
+    }
+    .directory-link::after {
+      content: 'Library';
+      font-size: 13px;
+    }
+    .search-bar {
+      display: none;
+    }
+    .hero {
+      aspect-ratio: 16 / 9;
+    }
+    .author-avatar {
+      display: none;
+    }
+    .callout-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="logo" href="https://wademitchell.github.io/xops-reports/" aria-label="XOps YouTube Digest Library">
+    <span>X<strong>|</strong>Ops</span>
+  </a>
+  <a class="directory-link" href="https://wademitchell.github.io/xops-reports/">All digests</a>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search this digest...">
+    <div class="search-orb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="title-block">
+    <h1>These 12 NEW 3D Printing Apps Will BLOW Your Mind!</h1>
+    <div class="title-meta">
+      <a href="#key-ideas">Key ideas</a><span class="dot"></span><a href="#ranked">Items covered (not ranked)</a><span class="dot"></span><a href="#relevance">For you</a><span class="dot"></span><a href="#repo-readiness">Repo readiness</a><span class="dot"></span><a href="#comparison">Compare candidates</a><span class="dot"></span><a href="#try-next">Try next</a><span class="dot"></span><a href="#links">14 resources</a>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-img" style="background-image:url('https://i.ytimg.com/vi/3ZcTKYUpr7M/maxresdefault.jpg')"></div>
+    <div class="guest-favorite-badge">
+      <span></span>#3d-printing
+    </div>
+  </div>
+  <div class="grid">
+    <main class="main-content">
+      <section id="tldr">
+  <div class="author-row" style="margin-bottom: 24px;">
+    <div class="author-info">
+      <h2>Video by The Next Layer</h2>
+      <p>9 min read time</p>
+    </div>
+    <div class="author-avatar">🤖</div>
+  </div>
+  <p class="tldr-text">The creator presents a 2026 roundup of twelve 3D-printing tools spanning multicolor workflows, troubleshooting, printer management, slicers, mesh-to-STEP conversion, and macOS file previewing. The available source is metadata only: captions failed and the video-understanding fallback was unavailable, so the specific testing results and any ranking cannot be independently reconstructed. The strongest directly verifiable opportunities are PaintPort for locally remapping painted 3MF projects, OrcaSlicer-ImageMap for experimental image/texture work, and CMYKForge for multi-material FDM image reproduction.</p>
+</section>
+<section id="source-basis"><h2 class="section-title">Source basis</h2><p class="digest-detail">Metadata only: title, description, supplied timestamps, and source-provided links. Caption fetch failed; native video understanding was unavailable because its API key was not configured. Creator comments: none returned.</p><p class="digest-detail">Independent official-page verification was performed for PaintPort, OrcaSlicer-ImageMap, CMYKForge, Spoolio, Watchtower, CN3D Docs, Bespok3d, Mesh2Step, QuickLookStep, and ThumbHost3mf.</p></section>
+<section id="key-ideas"><h2 class="section-title">Key ideas</h2><p class="digest-detail">The creator frames the video as a month of testing recent software, plugins, and slicers, with attention to CMYK color mixing, filament management, software painting, print-farm tools, firmware-adjacent upgrades, calibration, and remixing STLs in Fusion 360. The individual test methodology and results are not available in the source basis.</p><p class="digest-detail">PaintPort is positioned around transferring painted 3MF models between Bambu/MakerWorld, PrusaSlicer, Bambu Studio, and Snapmaker Orca/OrcaSlicer. Its official site says processing is local in the browser and warns that ColorMix mapping is experimental and must be reviewed before printing. <a href="https://perspektive3d.github.io/paintport/" target="_blank" rel="noopener">Official page</a></p><p class="digest-detail">OrcaSlicer-ImageMap is a fork that adds image/texture projection, color-data conversion, and prime-tower image printing through overhang modulation and alternating color layers. Its README provides a Windows portable build, but its output quality and printer compatibility need a controlled test. <a href="https://github.com/sentientstardust-dev/OrcaSlicer-ImageMap" target="_blank" rel="noopener">Repository</a></p><p class="digest-detail">CMYKForge describes itself as software for multi-material FDM image reproduction, using CMYK color-planning concepts with the constraints of translucent filament and layer behavior. <a href="https://cmykforge.org/" target="_blank" rel="noopener">Official page</a></p><p class="digest-detail">Print operations tools in the roundup cover monitoring and inventory rather than model design: Watchtower advertises multi-stream printer monitoring and slicer upload; Spoolio offers inventory, history, and paid slicer-link integration. <a href="https://watchtower3d.com/" target="_blank" rel="noopener">Watchtower</a> <a href="https://spoolio.net/" target="_blank" rel="noopener">Spoolio</a></p><p class="digest-detail">The final group is about CAD-file interoperability and desktop convenience: Mesh2Step converts mesh formats to faceted or limited analytic B-Rep STEP; QuickLookStep and ThumbHost3mf are macOS-only preview/thumbnail utilities. <a href="https://github.com/tommasobbianchi/mesh2step" target="_blank" rel="noopener">Mesh2Step</a> <a href="https://github.com/johnboiles/quick-look-step" target="_blank" rel="noopener">QuickLookStep</a> <a href="https://github.com/DavidPhillipOster/ThumbHost3mf" target="_blank" rel="noopener">ThumbHost3mf</a></p></section>
+<section id="callouts">
+  <h2 class="section-title">Creator&#39;s key callouts</h2>
+  <div class="callouts-list">
+    <div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>The creator says the roundup was narrowed to twelve tools worth trying, but the metadata does not establish a ranked order, a winner, or individual verdicts.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>The description identifies one unnamed print-farm product as especially strong and another tool as potentially important for open-source printing software. Those claims cannot be reliably assigned to a named product from the available evidence.</p>
+  </div>
+</div>
+  </div>
+</section>
+<section id="ranked">
+  <h2 class="section-title">Items covered (not ranked)</h2>
+  <div class="reviews-grid">
+    <div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[PaintPort](https://perspektive3d.github.io/paintport/)</h3>
+    </div>
+  </div>
+  <p class="review-desc">A local browser tool for remapping painted 3MF files to actual spool slots and supported target slicer formats. The official quickstart requires importing a painted 3MF, entering spool slots, reviewing Auto-map, choosing a target slicer, and opening the exported file as a project. The video-specific verdict is not verified.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[OrcaSlicer Image Map](https://github.com/sentientstardust-dev/OrcaSlicer-ImageMap)</h3>
+    </div>
+  </div>
+  <p class="review-desc">An OrcaSlicer fork for image/texture projection and color-data workflows; its README says it has a Windows portable build. The creator's rationale beyond inclusion is not verified.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[CMYKForge](https://cmykforge.org/)</h3>
+    </div>
+  </div>
+  <p class="review-desc">Multi-material FDM image-reproduction software centered on CMYK-style color planning. Practical hardware, material, and quality requirements were not established by the available source.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[CN3D Docs](https://docs.cn3d.eu/en/start)</h3>
+    </div>
+  </div>
+  <p class="review-desc">Troubleshooting flows and maker education for issues including layer shift, warping, under-extrusion, elephant foot, bed adhesion, and Z-banding. The video-specific use case is not verified.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[Watchtower](https://watchtower3d.com/)</h3>
+    </div>
+  </div>
+  <p class="review-desc">A printer dashboard that advertises slicer upload and monitoring of 40+ simultaneous video streams. Pricing, supported printer stack, and the creator's evaluation were not verified here.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[Spoolio](https://spoolio.net/)</h3>
+    </div>
+  </div>
+  <p class="review-desc">Hosted filament inventory and print-history tool. Its site says the free tier covers up to 50 spools and two printers; Pro is listed at $1.99/month and adds slicer-link integration through a Python post-processing script. <a href="https://spoolio.net/" target="_blank" rel="noopener">Pricing and integration</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[Bespok3d](https://bespok3d.app/)</h3>
+    </div>
+  </div>
+  <p class="review-desc">A plugin-oriented app and registry for Klipper printers; the official site points to a Linux Flatpak beta and its source/release pages. Windows support was not verified.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[PrusaSlicer](https://www.prusa3d.com/p/prusaslicer/)</h3>
+    </div>
+  </div>
+  <p class="review-desc">A slicer identified in the video metadata as version 3.0. The official product page did not provide enough extracted detail to verify the stated version or new features.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[Mesh2Step](https://github.com/tommasobbianchi/mesh2step)</h3>
+    </div>
+  </div>
+  <p class="review-desc">Open-source converter from STL, OBJ, 3MF, or PLY meshes to STEP B-Rep output. It explicitly distinguishes faithful faceted conversion from optional plane/cylinder recovery; it is not a general-purpose automatic CAD reconstruction tool.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[QuickLookStep](https://github.com/johnboiles/quick-look-step)</h3>
+    </div>
+  </div>
+  <p class="review-desc">macOS Finder Quick Look extension for STEP previews. Not applicable to a Windows workflow.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[ThumbHost3mf](https://github.com/DavidPhillipOster/ThumbHost3mf)</h3>
+    </div>
+  </div>
+  <p class="review-desc">macOS thumbnail provider for embedded previews in gcode, bgcode, and 3MF files. Not applicable to a Windows workflow.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[LayersPeek](https://layerspeek.com/)</h3>
+    </div>
+  </div>
+  <p class="review-desc">Direct source-provided product link. Its capabilities and platform support could not be verified from the available source.</p>
+  
+</div>
+  </div>
+</section>
+<section id="relevance"><h2 class="section-title">Why it matters to you - RA assessment</h2><p class="digest-detail"><a href="https://perspektive3d.github.io/paintport/" target="_blank" rel="noopener">PaintPort</a> - Watch. It could reduce friction when a painted Bambu/MakerWorld or Orca 3MF does not match the filament slots on the target printer, while keeping the transformation local. The decisive constraint is compatibility: its documented targets are specific Prusa, Bambu, and Snapmaker Orca versions, and ColorMix mapping is explicitly experimental.</p><p class="digest-detail"><a href="https://github.com/sentientstardust-dev/OrcaSlicer-ImageMap" target="_blank" rel="noopener">OrcaSlicer-ImageMap</a> - Try only for a defined decorative or image-texture experiment. It adds capabilities a standard slicer may not expose, but it is a maintained fork rather than the mainstream OrcaSlicer release line, so repeatability and compatibility should be validated on a disposable test print.</p><p class="digest-detail"><a href="https://cmykforge.org/" target="_blank" rel="noopener">CMYKForge</a> - Watch. Its stated purpose overlaps with the image/color-printing direction, but independent evidence here does not establish the required printer configuration, supported slicers, or output quality. It is not yet a defensible default choice.</p><p class="digest-detail"><a href="https://github.com/johnboiles/quick-look-step" target="_blank" rel="noopener">QuickLookStep</a> and <a href="https://github.com/DavidPhillipOster/ThumbHost3mf" target="_blank" rel="noopener">ThumbHost3mf</a> - Skip for a Windows workflow: both are explicitly macOS apps.</p></section>
+<section id="repo-readiness"><h2 class="section-title">Repo readiness - RA assessment</h2><p class="digest-detail"><a href="https://github.com/perspektive3D/paintport" target="_blank" rel="noopener">PaintPort</a> - Trial with caveats, checked 2026-09-22. Maintenance: current release/activity date was not verified from the retrieved repository page. Docs/setup: the README gives a concrete local-browser workflow and requires PrusaSlicer 2.9.6+ with Core One INDX, Bambu Studio 2.7+, or Snapmaker Orca 2.3.5 plus a modern browser; newer Orca versions may need retesting. License: AGPL-3.0, stated in the repository and official page. Blockers: ColorMix mapping is experimental; no issue-level compatibility assessment was established.</p><p class="digest-detail"><a href="https://github.com/sentientstardust-dev/OrcaSlicer-ImageMap" target="_blank" rel="noopener">OrcaSlicer-ImageMap</a> - Ready for a small trial, checked 2026-09-22. Maintenance: the releases page shows v1.0.44 on 2026-08-01 with an automated build from a named commit. Docs/setup: README documents a Windows portable build and describes image texture workflows. License: license terms need separate verification from the LICENSE file; the README's discussion of GPL components is not sufficient to label the whole repository. Blockers: issue creation is restricted, and no issue-level maintainer-response assessment was available; test only noncritical models first.</p></section>
+<section id="comparison"><h2 class="section-title">Candidate comparison - RA assessment</h2><p class="digest-detail">Decision: Choose a path for turning graphics or existing painted 3MF work into multicolor FDM output. The criteria are inferred from likely 3D-printing use: keep data local, avoid changing the primary slicer unnecessarily, and make output testable. Current printer and slicer setup are not established publicly.</p><table class="candidate-table"><caption>Shortlist against your needs - RA assessment</caption><thead><tr><th scope="col">Criterion</th><th scope="col"><a href="https://perspektive3d.github.io/paintport/" target="_blank" rel="noopener">PaintPort</a></th><th scope="col"><a href="https://github.com/sentientstardust-dev/OrcaSlicer-ImageMap" target="_blank" rel="noopener">OrcaSlicer-ImageMap</a></th><th scope="col"><a href="https://cmykforge.org/" target="_blank" rel="noopener">CMYKForge</a></th></tr></thead><tbody><tr><th scope="row">Primary use</th><td>Converts/remaps existing painted 3MF projects to supported target slicers</td><td>Creates image/texture and color-data workflows inside an OrcaSlicer fork</td><td>Plans multi-material FDM image reproduction</td></tr><tr><th scope="row">Local versus hosted</th><td>Fully local browser processing; no uploads stated</td><td>Desktop portable build documented for Windows</td><td>Not verified</td></tr><tr><th scope="row">Integration cost</th><td>Requires a compatible painted 3MF and specific target-slicer versions</td><td>Requires trying a separate slicer fork</td><td>Platform, slicer, and hardware requirements not verified</td></tr><tr><th scope="row">Material tradeoff</th><td>ColorMix mappings are experimental and need review</td><td>Color output uses overhang modulation and alternating color layers</td><td>Filament translucency and layering affect results</td></tr><tr><th scope="row">Maintenance evidence</th><td>Current activity not verified in retrieved source</td><td>Latest v1.0.44 release dated 2026-08-01</td><td>Maintenance status not verified</td></tr></tbody></table><p class="digest-detail">Recommendation: Prefer PaintPort when the task is preserving/remapping an already painted 3MF and its documented target versions match the printer. Its decisive advantage is local conversion without replacing the slicer. Use OrcaSlicer-ImageMap instead when the goal is to originate a texture or image-print experiment; the tradeoff is adopting a fork. CMYKForge could be better if its unverified workflow matches the installed hardware, but that fact could change the choice.</p></section>
+<section id="try-next"><h2 class="section-title">Try next</h2><p class="digest-detail">For an existing painted, noncritical 3MF, open it in PaintPort, map the actual loaded spools, export to the target slicer as a project, and inspect every color/slot assignment before printing. Success: the target slicer preserves the intended paint regions and spool mapping without manual reconstruction.</p><p class="digest-detail">For a separate decorative test, install no software yet: first compare the latest OrcaSlicer-ImageMap release notes and license with the printer/slicer setup, then use a small calibration-style object. Success: the texture or color effect appears without affecting the normal slicer workflow.</p></section>
+<section id="caveats"><h2 class="section-title">Caveats</h2><p class="digest-detail">This is deliberately a metadata-based digest, not a verification of the full video. The exact tests, rankings, performance claims, sponsored relationship, and several per-tool conclusions remain unverified.</p><p class="digest-detail">Source-provided links include promotional, Patreon, community, affiliate, and merch links; they were excluded because they are not substantive resources for the tools themselves.</p><p class="digest-detail">The description names PrusaSlicer 3.0, but the official page retrieved did not verify that version or its changes.</p></section>
+<section id="links">
+  <h2 class="section-title">Useful links</h2>
+  <div class="links">
+    <a class="lk" href="https://perspektive3d.github.io/paintport/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=perspektive3d.github.io&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">PaintPort official local 3MF conversion tool.</span><span class="lk-dom">perspektive3d.github.io</span></span></a>
+<a class="lk" href="https://github.com/perspektive3D/paintport" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">PaintPort source and requirements.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/sentientstardust-dev/OrcaSlicer-ImageMap" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">OrcaSlicer-ImageMap source and Windows install path.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/sentientstardust-dev/OrcaSlicer-ImageMap/releases" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Release activity evidence.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://cmykforge.org/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=cmykforge.org&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">CMYKForge official product page.</span><span class="lk-dom">cmykforge.org</span></span></a>
+<a class="lk" href="https://docs.cn3d.eu/en/start" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=docs.cn3d.eu&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">CN3D troubleshooting and learning hub.</span><span class="lk-dom">docs.cn3d.eu</span></span></a>
+<a class="lk" href="https://watchtower3d.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=watchtower3d.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Watchtower printer dashboard.</span><span class="lk-dom">watchtower3d.com</span></span></a>
+<a class="lk" href="https://spoolio.net/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=spoolio.net&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Spoolio inventory and slicer integration information.</span><span class="lk-dom">spoolio.net</span></span></a>
+<a class="lk" href="https://bespok3d.app/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=bespok3d.app&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Bespok3d Klipper plugin platform.</span><span class="lk-dom">bespok3d.app</span></span></a>
+<a class="lk" href="https://www.prusa3d.com/p/prusaslicer/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=prusa3d.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">PrusaSlicer official product page.</span><span class="lk-dom">prusa3d.com</span></span></a>
+<a class="lk" href="https://github.com/tommasobbianchi/mesh2step" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Mesh2Step source and technical scope.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/johnboiles/quick-look-step" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">macOS STEP preview utility.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/DavidPhillipOster/ThumbHost3mf" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">macOS 3MF/gcode thumbnail utility.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://layerspeek.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=layerspeek.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">LayersPeek direct source-provided link.</span><span class="lk-dom">layerspeek.com</span></span></a>
+  </div>
+</section>
+    </main>
+    <aside class="reservation-sidebar">
+      <div class="reservation-card">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--ink);">About this video</h3>
+        <div class="res-selectors" style="margin-bottom: 16px;">
+          <div class="res-cell">
+            <label>Video Title</label>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">These 12 NEW 3D Printing Apps Will BLOW Your Mind!</div>
+          </div>
+          <div class="res-cell">
+            <label>Channel</label>
+            <div style="color: var(--ink);">The Next Layer</div>
+          </div>
+        </div>
+        <div class="recommendations-list" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+          
+        </div>
+        <a class="res-btn" href="https://www.youtube.com/watch?v=3ZcTKYUpr7M" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Watch on YouTube
+        </a>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-bottom">
+    <div>© 2026 XOps Report • Generated Sep 22, 2026, 09:06 AM PT</div>
+  </div>
+</footer>
+<script>
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.callout-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+      document.querySelectorAll('.digest-detail').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.review-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.lk').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+    });
+  }
+</script>
+</body>
+</html>
