@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Top Repos + Fame, Traffic &amp; Agents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --primary: #ff385c;
+    --primary-active: #e00b41;
+    --ink: #222222;
+    --body: #222222;
+    --muted: #6a6a6a;
+    --muted-soft: #929292;
+    --hairline: #dddddd;
+    --hairline-soft: #ebebeb;
+    --canvas: #ffffff;
+    --surface-soft: #f7f7f7;
+    --surface-strong: #f2f2f2;
+    --shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img, svg, video, iframe {
+    max-width: 100%;
+  }
+
+  p, h1, h2, h3, a, span, div {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Header */
+  .header {
+    height: 80px;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: var(--canvas);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #222222;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .logo strong {
+    font-weight: 800;
+    color: #000000;
+  }
+
+  .directory-link {
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-left: 20px;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .directory-link:hover {
+    border-color: var(--primary);
+    background: var(--surface-soft);
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    height: 48px;
+    padding: 0 8px 0 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-left: auto;
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    width: 180px;
+    padding-right: 8px;
+  }
+
+  .search-orb {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .search-orb svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+  }
+
+  /* Main Container */
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+  }
+
+  /* Title Block */
+  .title-block {
+    margin-bottom: 24px;
+  }
+
+  .title-block h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .title-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .title-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  .title-meta a {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  /* Photo Hero */
+  .hero {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 32px;
+    aspect-ratio: 2.8 / 1;
+    background: var(--surface-soft);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .guest-favorite-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--canvas);
+    border-radius: 9999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: lowercase;
+  }
+
+  .guest-favorite-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
+  }
+
+  .main-content, .reservation-sidebar, .author-info, .callout-body, .review-item, .review-rank, .lk span {
+    min-width: 0;
+  }
+
+  .main-content {
+    max-width: 100%;
+  }
+
+  /* Left Column */
+  .main-content section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .main-content section:first-of-type {
+    padding-top: 0;
+  }
+
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .author-info h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .author-info p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+  }
+
+  .candidate-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .candidate-table caption { text-align: left; color: var(--muted); margin-bottom: 12px; }
+  .candidate-table th, .candidate-table td { border: 1px solid var(--hairline); padding: 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; line-height: 1.6; }
+  .candidate-table thead { background: var(--surface-soft); }
+  @media (max-width: 600px) {
+    .candidate-table { font-size: 12px; }
+    .candidate-table th, .candidate-table td { padding: 6px; }
+  }
+  .digest-detail { line-height: 1.75; margin: 0 0 18px; }
+  #source-basis { color: var(--muted); font-size: 14px; }
+  #relevance { border-left: 3px solid var(--primary); padding-left: 20px; }
+
+  /* TL;DR Pull */
+  .tldr-text {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Key Callouts */
+  .section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .callouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .callout-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .callout-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--ink);
+    flex: none;
+  }
+
+  .callout-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+
+  .callout-body h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .callout-body p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Ranked List as Reviews */
+  .reviews-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .review-item {
+    padding: 24px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .review-rank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .review-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    display: grid;
+    place-items: center;
+  }
+
+  .review-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .review-desc {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .review-link img {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+  }
+
+  /* Links Grid */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 12px;
+  }
+
+  .lk {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 13px 14px;
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .lk:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  .lk img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 2px;
+    flex: none;
+    background: #fff;
+  }
+
+  .lk .lk-desc {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.45;
+    display: block;
+  }
+
+  .lk .lk-dom {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* Right Column (Sticky Reservation) */
+  .reservation-sidebar {
+    position: sticky;
+    top: 112px;
+  }
+
+  .reservation-card {
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .res-selectors {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .res-cell {
+    padding: 12px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .res-cell:last-child {
+    border-bottom: none;
+  }
+
+  .res-cell label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .res-cell div {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  .res-btn {
+    width: 100%;
+    height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .res-btn:hover {
+    background: var(--primary-active);
+  }
+
+  .res-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--hairline);
+    padding: 48px 40px;
+    margin-top: 80px;
+    font-size: 16px;
+    color: var(--muted);
+    background: var(--canvas);
+  }
+
+  .footer-bottom {
+    max-width: 1560px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  @media(max-width:960px){
+    body {
+      font-size: 16px;
+    }
+    .container {
+      padding: 18px 18px 56px;
+    }
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+    .reservation-sidebar {
+      position: static;
+    }
+    .header {
+      padding: 0 16px;
+      height: 64px;
+    }
+    .title-block h1 {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.15;
+    }
+    .author-row {
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .author-info h2 {
+      font-size: clamp(22px, 7vw, 30px);
+    }
+    .tldr-text {
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    .section-title {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.18;
+    }
+    .callout-item {
+      gap: 14px;
+    }
+    .callout-body p {
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    .links {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .footer {
+      padding: 32px 18px;
+    }
+    .footer-bottom {
+      display: block;
+    }
+    .directory-link {
+      margin-left: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    .search-bar span {
+      display: none;
+    }
+    .search-bar {
+      padding-left: 16px;
+    }
+  }
+
+  @media(max-width:430px){
+    .container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .directory-link {
+      font-size: 0;
+      padding: 8px 10px;
+    }
+    .directory-link::after {
+      content: 'Library';
+      font-size: 13px;
+    }
+    .search-bar {
+      display: none;
+    }
+    .hero {
+      aspect-ratio: 16 / 9;
+    }
+    .author-avatar {
+      display: none;
+    }
+    .callout-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="logo" href="https://wademitchell.github.io/xops-reports/" aria-label="XOps YouTube Digest Library">
+    <span>X<strong>|</strong>Ops</span>
+  </a>
+  <a class="directory-link" href="https://wademitchell.github.io/xops-reports/">All digests</a>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search this digest...">
+    <div class="search-orb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="title-block">
+    <h1>Top Repos + Fame, Traffic &amp; Agents</h1>
+    <div class="title-meta">
+      <a href="#key-ideas">Key ideas</a><span class="dot"></span><a href="#ranked">Items covered (not ranked)</a><span class="dot"></span><a href="#relevance">For you</a><span class="dot"></span><a href="#repo-readiness">Repo readiness</a><span class="dot"></span><a href="#comparison">Compare candidates</a><span class="dot"></span><a href="#try-next">Try next</a><span class="dot"></span><a href="#links">13 resources</a>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-img" style="background-image:url('https://i.ytimg.com/vi/hlOk-EFUITQ/maxresdefault.jpg')"></div>
+    <div class="guest-favorite-badge">
+      <span></span>#ai
+    </div>
+  </div>
+  <div class="grid">
+    <main class="main-content">
+      <section id="tldr">
+  <div class="author-row" style="margin-bottom: 24px;">
+    <div class="author-info">
+      <h2>Video by The Next New Thing</h2>
+      <p>10 min read time</p>
+    </div>
+    <div class="author-avatar">🤖</div>
+  </div>
+  <p class="tldr-text">The description presents three attention-getting projects and ten more GitHub entries spanning publicity, SEO, agent coordination, code review, reusable skills, knowledge retrieval, and coding-agent interfaces. For an existing agent research and development workflow, selectively inspect a focused engineering skill before adopting another orchestration platform. The video's captions and direct viewing were unavailable, so the chapter descriptions below are not a verified account of what the hosts actually said or ranked.</p>
+</section>
+<section id="source-basis"><h2 class="section-title">Source basis</h2><p class="digest-detail">Metadata only: video title, full creator description, supplied repository links and chapter labels. Caption retrieval failed, video-understanding fallback was unavailable, and creator-authored comments were empty. Independent GitHub README, license, release, activity, and issue checks support the linked product facts, not claims about the unseen discussion. Chapter marks below come from the description, not observed timing in the video.</p></section>
+<section id="key-ideas"><h2 class="section-title">Key ideas</h2><p class="digest-detail">The opening cluster puts publicity and discoverability alongside agent infrastructure: <a href="https://github.com/elvisun/newsjack" target="_blank" rel="noopener">NewsJack</a> packages media-outreach skills, while <a href="https://github.com/every-app/open-seo" target="_blank" rel="noopener">OpenSEO</a> offers SEO workflows but requires a DataForSEO key and usage charges. Their stated use cases differ from software engineering, and the description alone does not establish comparative results (<a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=15s" target="_blank" rel="noopener">00:15</a>, <a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=170s)" target="_blank" rel="noopener">02:50</a>.</p><p class="digest-detail"><a href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener">Paperclip</a> frames agent coordination as a self-hosted organizational control plane with tasks, budgets, and governance. That is a much larger architectural commitment than adding a skill to an existing agent workflow (<a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=332s)" target="_blank" rel="noopener">05:32</a>.</p><p class="digest-detail"><a href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">Open Code Review</a> reads Git changes and gives line-level AI review through a configured model endpoint. Its README describes internal-scale experience and benchmarks; those are project claims, not independently validated performance here (<a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=592s)" target="_blank" rel="noopener">09:52</a>.</p><p class="digest-detail">The description connects shared agent instructions and reusable engineering expertise. <a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">ECC</a> offers a broad harness with skills, hooks, memory and rules; <a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener">Agent Skills</a> offers a smaller portable skill collection. Their overlap is substantial, so the marginal value of a single workflow matters more than collection size (<a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=734s" target="_blank" rel="noopener">12:14</a>, <a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=986s" target="_blank" rel="noopener">16:26</a>, <a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=1210s)" target="_blank" rel="noopener">20:10</a>.</p><p class="digest-detail">Knowledge and coordination reappear in distinct forms: <a href="https://github.com/Tencent/WeKnora" target="_blank" rel="noopener">WeKnora</a> builds searchable document knowledge bases, <a href="https://github.com/stablyai/orca" target="_blank" rel="noopener">Orca</a> manages parallel coding agents in worktrees, and <a href="https://github.com/TencentCloud/Octop" target="_blank" rel="noopener">Octop</a> is a self-hosted multi-user assistant. None is a drop-in replacement for every other one (<a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=1117s" target="_blank" rel="noopener">18:37</a>, <a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=1503s" target="_blank" rel="noopener">25:03</a>, <a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=1688s)" target="_blank" rel="noopener">28:08</a>.</p><p class="digest-detail">The final description mentions the hosts' internal content workflow and a custom call-recorder project. With no transcript, these are topics rather than reproducible instructions or evidence that either workflow works as claimed (<a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=1940s" target="_blank" rel="noopener">32:20</a>, <a href="https://www.youtube.com/watch?v=hlOk-EFUITQ&amp;t=2000s)" target="_blank" rel="noopener">33:20</a>.</p></section>
+<section id="ranked">
+  <h2 class="section-title">Items covered (not ranked)</h2>
+  <div class="reviews-grid">
+    <div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>NewsJack</h3>
+    </div>
+  </div>
+  <p class="review-desc">PR and journalist-research skills; presented among three projects getting extra attention, not a numbered rank. The README distinguishes local saved monitoring from limited chat-only use.</p>
+  <a class="review-link" href="https://github.com/elvisun/newsjack" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>OpenSEO</h3>
+    </div>
+  </div>
+  <p class="review-desc">Agent-accessible SEO research and tracking; presented as an alternative to subscription suites, but its README specifies pay-as-you-go DataForSEO data.</p>
+  <a class="review-link" href="https://github.com/every-app/open-seo" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Paperclip</h3>
+    </div>
+  </div>
+  <p class="review-desc">Agent-team control plane for goals, tasks and budgets; attention-getting opening item, not a verified rank. Adds a server and governance layer.</p>
+  <a class="review-link" href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Anthropic Financial Services</h3>
+    </div>
+  </div>
+  <p class="review-desc">Finance-oriented agent and plugin templates with connectors; listed in the description's ten-item sequence, with no verified numbered position. Domain-specific and Claude-oriented.</p>
+  <a class="review-link" href="https://github.com/anthropics/financial-services" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Alibaba Open Code Review</h3>
+    </div>
+  </div>
+  <p class="review-desc">Git-diff and file review CLI with line-level output and configured model endpoint. Project-reported benchmarks were not independently checked.</p>
+  <a class="review-link" href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Claude Code / shared agent instructions</h3>
+    </div>
+  </div>
+  <p class="review-desc">Claude's coding agent; the description mentions agents.md support, but this feature's details and the hosts' exact advice could not be verified from video content.</p>
+  <a class="review-link" href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>ECC</h3>
+    </div>
+  </div>
+  <p class="review-desc">Broad engineering harness of skills, rules, hooks and memory. Its README says Claude Code is best supported and Codex has a sync path, not feature parity.</p>
+  <a class="review-link" href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>WeKnora</h3>
+    </div>
+  </div>
+  <p class="review-desc">RAG, reasoning and wiki over team documents, with local and hosted deployment options; significant knowledge-infrastructure scope.</p>
+  <a class="review-link" href="https://github.com/Tencent/WeKnora" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Addy Osmani's Agent Skills</h3>
+    </div>
+  </div>
+  <p class="review-desc">Portable engineering skills across coding agents; more narrowly focused on workflows than a full orchestration system.</p>
+  <a class="review-link" href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Anthropic Knowledge Work Plugins</h3>
+    </div>
+  </div>
+  <p class="review-desc">Role-specific plugin bundles for Cowork and Claude Code; connectors and commands require platform fit.</p>
+  <a class="review-link" href="https://github.com/anthropics/knowledge-work-plugins" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Orca</h3>
+    </div>
+  </div>
+  <p class="review-desc">Interface for parallel coding agents and worktrees; prospective overlap with an existing agent coordinator.</p>
+  <a class="review-link" href="https://github.com/stablyai/orca" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Tencent Cloud Octop</h3>
+    </div>
+  </div>
+  <p class="review-desc">Self-hosted multi-user agent assistant and messaging gateway; Python runtime and another control plane.</p>
+  <a class="review-link" href="https://github.com/TencentCloud/Octop" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Claude Code Templates</h3>
+    </div>
+  </div>
+  <p class="review-desc">Configurations, commands, hooks and templates for Claude Code; useful to inspect selectively rather than import wholesale.</p>
+  <a class="review-link" href="https://github.com/davila7/claude-code-templates" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy">github.com</a>
+</div>
+  </div>
+</section>
+<section id="relevance"><h2 class="section-title">Why it matters to you - RA assessment</h2><p class="digest-detail">Agent Skills - Try one isolated skill, not the whole pack. Portable SKILL.md workflows could improve one coding review without replacing your current agent research and work-handoff flow (<a href="https://github.com/addyosmani/agent-skills)" target="_blank" rel="noopener">README</a>. Tradeoff: a <a href="https://github.com/addyosmani/agent-skills/issues/597" target="_blank" rel="noopener">reported single-skill install issue</a> says references can be missing, so verify the exact skill and bundled references before any trial.</p><p class="digest-detail">ECC - Watch rather than install wholesale. Its Codex support and broader harness could add guardrails, but the hooks, rules and memory duplicate existing workflow layers, and <a href="https://github.com/affaan-m/ECC/issues/3020" target="_blank" rel="noopener">a Codex staging-loop report</a> makes the installer path material. A specific skill is a safer evaluation boundary.</p><p class="digest-detail">Paperclip, Orca and Octop - Skip an architectural migration for now: agent coordination and handoffs already have a current approach. Their distinct control planes need a demonstrated gap, integration plan and operational owner before replacing it (<a href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener">Paperclip</a>, <a href="https://github.com/stablyai/orca" target="_blank" rel="noopener">Orca</a>, <a href="https://github.com/TencentCloud/Octop)" target="_blank" rel="noopener">Octop</a>. This is a fit judgment, not a claim the tools are deficient.</p><p class="digest-detail">Open Code Review - Watch for a narrowly scoped code-review comparison if existing review misses concrete defects; do not treat its <a href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener">project benchmark</a> as independently measured advantage. WeKnora is likewise a possible document-search experiment only if an existing knowledge workflow demonstrably fails (<a href="https://github.com/Tencent/WeKnora)" target="_blank" rel="noopener">README</a>.</p></section>
+<section id="repo-readiness"><h2 class="section-title">Repo readiness - RA assessment</h2><p class="digest-detail">Agent Skills - 2026-09-25: Trial with caveats. <a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.10" target="_blank" rel="noopener">Release 0.6.10</a> was published September 18 and <a href="https://github.com/addyosmani/agent-skills/commits/main/" target="_blank" rel="noopener">main had activity September 23</a>. The <a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener">README</a> gives marketplace and portable skill routes; no Hermes-specific installation was verified. <a href="https://github.com/addyosmani/agent-skills/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>: MIT. <a href="https://github.com/addyosmani/agent-skills/issues/597" target="_blank" rel="noopener">Issue #597</a> reports missing references in single-skill installs and a response recommends full-pack installation pending packaging work; <a href="https://github.com/addyosmani/agent-skills/issues/599" target="_blank" rel="noopener">issue #599</a> reports a guard-script failure, so do not assume all sample gates enforce their prose. Neither issue establishes a defect in the particular skill proposed below.</p><p class="digest-detail">ECC - 2026-09-25: Trial with caveats, limited to reading or an isolated skill. <a href="https://github.com/affaan-m/ECC/releases/tag/v2.2.1" target="_blank" rel="noopener">Release v2.2.1</a> was published September 8; <a href="https://github.com/affaan-m/ECC/commits/main/" target="_blank" rel="noopener">main activity</a> and <a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">README</a> document installation and a capability-limited Codex path. <a href="https://raw.githubusercontent.com/affaan-m/ECC/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>: MIT. Open <a href="https://github.com/affaan-m/ECC/issues/3020" target="_blank" rel="noopener">issue #3020</a> reports repeated Codex staging copies; <a href="https://github.com/affaan-m/ECC/issues/2810" target="_blank" rel="noopener">issue #2810</a> documents a prior Codex MCP compatibility problem and later fixes, with package-version verification still important. Reports are not an audit of the latest installed version or Windows/Hermes compatibility.</p></section>
+<section id="comparison"><h2 class="section-title">Candidate comparison - RA assessment</h2><p class="digest-detail">Decision: For one improvement to coding-agent review, shortlist Agent Skills and ECC because both supply engineering workflows usable beyond one coding assistant. The known baseline is an existing Hermes agent and project skill workflow; the inferred criterion is a low-disruption addition, not a wholesale replacement. Windows/Hermes behavior has not been exercised.</p><table class="candidate-table"><caption>Shortlist against your needs - RA assessment</caption><thead><tr><th scope="col">Criterion</th><th scope="col"><a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener">Agent Skills</a></th><th scope="col"><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">ECC</a></th></tr></thead><tbody><tr><th scope="row">Scope and marginal value</th><td><a href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener">Portable focused skills</a>, including <a href="https://github.com/addyosmani/agent-skills/blob/main/skills/code-review-and-quality/SKILL.md" target="_blank" rel="noopener">code-review-and-quality</a></td><td><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">Skills plus hooks, memory, rules and agents</a>; more breadth but more workflow overlap</td></tr><tr><th scope="row">Adoption boundary</th><td><a href="https://github.com/addyosmani/agent-skills/issues/597" target="_blank" rel="noopener">Single-skill path has reported missing references</a>; inspect files together before trial</td><td><a href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener">Codex sync is supported with limitations</a>; avoid assuming equivalent Hermes integration</td></tr><tr><th scope="row">Maintenance evidence</th><td><a href="https://github.com/addyosmani/agent-skills/releases/tag/0.6.10" target="_blank" rel="noopener">0.6.10 release</a> and <a href="https://github.com/addyosmani/agent-skills/commits/main/" target="_blank" rel="noopener">September commits</a></td><td><a href="https://github.com/affaan-m/ECC/releases/tag/v2.2.1" target="_blank" rel="noopener">v2.2.1 release</a> and <a href="https://github.com/affaan-m/ECC/commits/main/" target="_blank" rel="noopener">September commits</a></td></tr><tr><th scope="row">Material blocker to test</th><td><a href="https://github.com/addyosmani/agent-skills/issues/597" target="_blank" rel="noopener">Missing references report</a> means verify a self-contained skill bundle</td><td><a href="https://github.com/affaan-m/ECC/issues/3020" target="_blank" rel="noopener">Marketplace staging report</a> argues against an installer-led first trial</td></tr></tbody></table><p class="digest-detail">Recommendation: Keep the current approach and inspect Agent Skills' one code-review workflow first: smaller scope is the decisive advantage. ECC's richer harness may win if repeated failures show a need for coordinated hooks and memory, but it carries more overlap and installation risk. A controlled test of incremental review quality on the same sample change, plus reference-file integrity, could change the choice.</p></section>
+<section id="try-next"><h2 class="section-title">Try next</h2><p class="digest-detail">Compare the <a href="https://github.com/addyosmani/agent-skills/blob/main/skills/code-review-and-quality/SKILL.md" target="_blank" rel="noopener">code-review-and-quality skill</a> against the current review process on one non-sensitive change, without installing a pack. Success means at least one reproducible, useful finding or clearer review protocol, with all referenced files available and no extra control plane.</p></section>
+<section id="caveats"><h2 class="section-title">Caveats</h2><p class="digest-detail">No captions or direct video-understanding notes were available. The description's phrase &quot;top 10&quot; does not establish explicit ranks, host preferences, demonstrations, numerical results, or even complete caveats. The item sequence is description order, not a reconstruction of a ranked countdown.</p><p class="digest-detail">The creators' resource page did not expose additional usable links to the web extractor, so direct repositories came from their description. Sponsor and promotional links were excluded. Official project pages establish self-descriptions, not an independent security audit or successful local installation.</p></section>
+<section id="links">
+  <h2 class="section-title">Useful links</h2>
+  <div class="links">
+    <a class="lk" href="https://github.com/elvisun/newsjack" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked PR skill project.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/every-app/open-seo" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked SEO project.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked agent coordination platform.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/anthropics/financial-services" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked finance plugins and agents.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/alibaba/open-code-review" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked code review CLI.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked coding agent.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/affaan-m/ECC" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked engineering harness.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/Tencent/WeKnora" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked document knowledge platform.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/addyosmani/agent-skills" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked engineering skills.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/anthropics/knowledge-work-plugins" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked role-specific plugins.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/stablyai/orca" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked parallel coding interface.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/TencentCloud/Octop" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked multi-user assistant.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://github.com/davila7/claude-code-templates" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked Claude configuration collection.</span><span class="lk-dom">github.com</span></span></a>
+  </div>
+</section>
+    </main>
+    <aside class="reservation-sidebar">
+      <div class="reservation-card">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--ink);">About this video</h3>
+        <div class="res-selectors" style="margin-bottom: 16px;">
+          <div class="res-cell">
+            <label>Video Title</label>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Top Repos + Fame, Traffic &amp; Agents</div>
+          </div>
+          <div class="res-cell">
+            <label>Channel</label>
+            <div style="color: var(--ink);">The Next New Thing</div>
+          </div>
+        </div>
+        <div class="recommendations-list" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+          
+        </div>
+        <a class="res-btn" href="https://www.youtube.com/watch?v=hlOk-EFUITQ" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Watch on YouTube
+        </a>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-bottom">
+    <div>© 2026 XOps Report • Generated Sep 25, 2026, 02:06 PM PT</div>
+  </div>
+</footer>
+<script>
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.callout-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+      document.querySelectorAll('.digest-detail').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.review-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.lk').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+    });
+  }
+</script>
+</body>
+</html>
