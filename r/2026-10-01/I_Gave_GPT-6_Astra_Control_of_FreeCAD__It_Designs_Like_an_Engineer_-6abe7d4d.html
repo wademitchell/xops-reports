@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>I Gave GPT-6 Astra Control of FreeCAD (It Designs Like an Engineer)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --primary: #ff385c;
+    --primary-active: #e00b41;
+    --ink: #222222;
+    --body: #222222;
+    --muted: #6a6a6a;
+    --muted-soft: #929292;
+    --hairline: #dddddd;
+    --hairline-soft: #ebebeb;
+    --canvas: #ffffff;
+    --surface-soft: #f7f7f7;
+    --surface-strong: #f2f2f2;
+    --shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img, svg, video, iframe {
+    max-width: 100%;
+  }
+
+  p, h1, h2, h3, a, span, div {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Header */
+  .header {
+    height: 80px;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: var(--canvas);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #222222;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .logo strong {
+    font-weight: 800;
+    color: #000000;
+  }
+
+  .directory-link {
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-left: 20px;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .directory-link:hover {
+    border-color: var(--primary);
+    background: var(--surface-soft);
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    height: 48px;
+    padding: 0 8px 0 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-left: auto;
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    width: 180px;
+    padding-right: 8px;
+  }
+
+  .search-orb {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .search-orb svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+  }
+
+  /* Main Container */
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+  }
+
+  /* Title Block */
+  .title-block {
+    margin-bottom: 24px;
+  }
+
+  .title-block h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .title-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .title-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  .title-meta a {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  /* Photo Hero */
+  .hero {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 32px;
+    aspect-ratio: 2.8 / 1;
+    background: var(--surface-soft);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .guest-favorite-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--canvas);
+    border-radius: 9999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: lowercase;
+  }
+
+  .guest-favorite-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
+  }
+
+  .main-content, .reservation-sidebar, .author-info, .callout-body, .review-item, .review-rank, .lk span {
+    min-width: 0;
+  }
+
+  .main-content {
+    max-width: 100%;
+  }
+
+  /* Left Column */
+  .main-content section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .main-content section:first-of-type {
+    padding-top: 0;
+  }
+
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .author-info h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .author-info p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+  }
+
+  .candidate-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .candidate-table caption { text-align: left; color: var(--muted); margin-bottom: 12px; }
+  .candidate-table th, .candidate-table td { border: 1px solid var(--hairline); padding: 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; line-height: 1.6; }
+  .candidate-table thead { background: var(--surface-soft); }
+  @media (max-width: 600px) {
+    .candidate-table { font-size: 12px; }
+    .candidate-table th, .candidate-table td { padding: 6px; }
+  }
+  .digest-detail { line-height: 1.75; margin: 0 0 18px; }
+  #source-basis { color: var(--muted); font-size: 14px; }
+  #relevance { border-left: 3px solid var(--primary); padding-left: 20px; }
+
+  /* TL;DR Pull */
+  .tldr-text {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Key Callouts */
+  .section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .callouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .callout-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .callout-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--ink);
+    flex: none;
+  }
+
+  .callout-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+
+  .callout-body h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .callout-body p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Ranked List as Reviews */
+  .reviews-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .review-item {
+    padding: 24px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .review-rank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .review-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    display: grid;
+    place-items: center;
+  }
+
+  .review-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .review-desc {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .review-link img {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+  }
+
+  /* Links Grid */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 12px;
+  }
+
+  .lk {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 13px 14px;
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .lk:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  .lk img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 2px;
+    flex: none;
+    background: #fff;
+  }
+
+  .lk .lk-desc {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.45;
+    display: block;
+  }
+
+  .lk .lk-dom {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* Right Column (Sticky Reservation) */
+  .reservation-sidebar {
+    position: sticky;
+    top: 112px;
+  }
+
+  .reservation-card {
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .res-selectors {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .res-cell {
+    padding: 12px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .res-cell:last-child {
+    border-bottom: none;
+  }
+
+  .res-cell label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .res-cell div {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  .res-btn {
+    width: 100%;
+    height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .res-btn:hover {
+    background: var(--primary-active);
+  }
+
+  .res-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--hairline);
+    padding: 48px 40px;
+    margin-top: 80px;
+    font-size: 16px;
+    color: var(--muted);
+    background: var(--canvas);
+  }
+
+  .footer-bottom {
+    max-width: 1560px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  @media(max-width:960px){
+    body {
+      font-size: 16px;
+    }
+    .container {
+      padding: 18px 18px 56px;
+    }
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+    .reservation-sidebar {
+      position: static;
+    }
+    .header {
+      padding: 0 16px;
+      height: 64px;
+    }
+    .title-block h1 {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.15;
+    }
+    .author-row {
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .author-info h2 {
+      font-size: clamp(22px, 7vw, 30px);
+    }
+    .tldr-text {
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    .section-title {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.18;
+    }
+    .callout-item {
+      gap: 14px;
+    }
+    .callout-body p {
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    .links {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .footer {
+      padding: 32px 18px;
+    }
+    .footer-bottom {
+      display: block;
+    }
+    .directory-link {
+      margin-left: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    .search-bar span {
+      display: none;
+    }
+    .search-bar {
+      padding-left: 16px;
+    }
+  }
+
+  @media(max-width:430px){
+    .container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .directory-link {
+      font-size: 0;
+      padding: 8px 10px;
+    }
+    .directory-link::after {
+      content: 'Library';
+      font-size: 13px;
+    }
+    .search-bar {
+      display: none;
+    }
+    .hero {
+      aspect-ratio: 16 / 9;
+    }
+    .author-avatar {
+      display: none;
+    }
+    .callout-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="logo" href="https://wademitchell.github.io/xops-reports/" aria-label="XOps YouTube Digest Library">
+    <span>X<strong>|</strong>Ops</span>
+  </a>
+  <a class="directory-link" href="https://wademitchell.github.io/xops-reports/">All digests</a>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search this digest...">
+    <div class="search-orb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="title-block">
+    <h1>I Gave GPT-6 Astra Control of FreeCAD (It Designs Like an Engineer)</h1>
+    <div class="title-meta">
+      <a href="#key-ideas">Key ideas</a><span class="dot"></span><a href="#ranked">Items covered (not ranked)</a><span class="dot"></span><a href="#relevance">For you</a><span class="dot"></span><a href="#repo-readiness">Repo readiness</a><span class="dot"></span><a href="#try-next">Try next</a><span class="dot"></span><a href="#links">5 resources</a>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-img" style="background-image:url('https://i.ytimg.com/vi/M5KOgtk9VfI/maxresdefault.jpg')"></div>
+    <div class="guest-favorite-badge">
+      <span></span>#3d-printing
+    </div>
+  </div>
+  <div class="grid">
+    <main class="main-content">
+      <section id="tldr">
+  <div class="author-row" style="margin-bottom: 24px;">
+    <div class="author-info">
+      <h2>Video by Make Form</h2>
+      <p>6 min read time</p>
+    </div>
+    <div class="author-avatar">🤖</div>
+  </div>
+  <p class="tldr-text">Make Form describes connecting ChatGPT to FreeCAD through neka-nat's MCP add-on and using prompts and visual references to make an electronics enclosure, guitar knob, vase, and moving caliper assembly. The setup and examples are reported in the creator's description and chapters, not independently observed; the captions and video-understanding fallback were unavailable. The connector is real and documented, but AI-generated geometry needs measurement and mechanical validation before printing.</p>
+</section>
+<section id="source-basis"><h2 class="section-title">Source basis</h2><p class="digest-detail">Metadata only: title, full creator description, chapter list and links; transcript fetch failed and video-understanding fallback lacked a configured API key. No creator comments returned. Official FreeCAD and repository documentation independently checked on 2026-10-01. Do not treat the listed demonstrations or benchmark as independently verified.</p></section>
+<section id="key-ideas"><h2 class="section-title">Key ideas</h2><p class="digest-detail">The proposed workflow links a desktop MCP client to the <a href="https://github.com/neka-nat/freecad-mcp" target="_blank" rel="noopener">FreeCAD MCP server</a> and its FreeCAD add-on; the project documents a two-component architecture, with an add-on RPC listener and external MCP server. The description's no-config-file ChatGPT path is not confirmed by the repository, whose quickstart documents Claude Desktop configuration.</p><p class="digest-detail">The creator lists a board-measured ESP32 enclosure with a base, lid, USB opening and button cutouts. These are design targets, not proof that clearances, board variants, tolerances or fit were measured correctly. The <a href="https://www.freecad.org/" target="_blank" rel="noopener">official FreeCAD site</a> documents parametric modeling and STL support.</p><p class="digest-detail">A guitar control knob allegedly comes from a technical drawing and a Japandi vase from one AI image. The difference matters: a drawing may specify dimensions, while an image alone cannot establish wall thickness or physical scale; inspect the resulting model rather than treating a render as fabrication-ready.</p><p class="digest-detail">The final described example is a multi-part vernier caliper with sliding jaws, scale and selected-face knurling, followed by movement testing. A visual or simulated movement check would not establish measuring accuracy or print tolerances.</p><p class="digest-detail">The repository's <a href="https://github.com/neka-nat/freecad-mcp/blob/main/docs/installation.md" target="_blank" rel="noopener">installation guide</a> documents FreeCAD plus uv/uvx, an external Python 3.12+ server, copying the add-on into the correct versioned Mod directory, starting its RPC server and confirming a simple box appears. This is more setup than a prompt alone.</p></section>
+<section id="callouts">
+  <h2 class="section-title">Creator&#39;s key callouts</h2>
+  <div class="callouts-list">
+    <div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>The description promises a Windows walkthrough: desktop app, FreeCAD 1.1, uvx, add-on install, custom MCP server connection and RPC check. The exact ChatGPT UI steps were not verified.</p>
+  </div>
+</div>
+<div class="callout-item">
+  <div class="callout-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+  </div>
+  <div class="callout-body">
+    <p>The description reports BenchCAD percentages attributed to OpenAI, but supplies neither the primary benchmark report nor evaluation conditions. Treat these as an unverified promotional claim, not evidence of actual print quality.</p>
+  </div>
+</div>
+  </div>
+</section>
+<section id="ranked">
+  <h2 class="section-title">Items covered (not ranked)</h2>
+  <div class="reviews-grid">
+    <div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[FreeCAD MCP](https://github.com/neka-nat/freecad-mcp)</h3>
+    </div>
+  </div>
+  <p class="review-desc">Connector featured throughout; creator describes prompt-driven construction of four demonstrations. The original repository confirms FreeCAD modeling and code-execution tools, not the quality of this video's particular models.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[FreeCAD](https://www.freecad.org/)</h3>
+    </div>
+  </div>
+  <p class="review-desc">The CAD environment underlying all four examples; free, open-source parametric modeling, Windows support and STL import/export are documented by the project.</p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>[ChatGPT desktop](https://chatgpt.com/download/)</h3>
+    </div>
+  </div>
+  <p class="review-desc">Creator's proposed MCP client; the official download page offers a Windows Classic app, but this page does not establish the creator's custom-MCP UI path or plan requirements.</p>
+  
+</div>
+  </div>
+</section>
+<section id="relevance"><h2 class="section-title">Why it matters to you - RA assessment</h2><p class="digest-detail">FreeCAD MCP: Watch for your maker/3D-printing interests. It may accelerate rough enclosure or fixture prototypes, but the add-on installation, separate runtime and ability to execute Python inside FreeCAD create meaningful setup and trust costs. <a href="https://github.com/neka-nat/freecad-mcp/blob/main/docs/installation.md" target="_blank" rel="noopener">Repository installation</a> and <a href="https://github.com/neka-nat/freecad-mcp/blob/main/docs/execution.md" target="_blank" rel="noopener">execution documentation</a> support those constraints. A like does not establish a desire to adopt this stack.</p><p class="digest-detail">FreeCAD itself: Try only if a parametric, dimension-driven CAD need arises. Its <a href="https://www.freecad.org/" target="_blank" rel="noopener">official feature description</a> supports iterative editable designs, whereas an image-derived vase is less informative about fit.</p></section>
+<section id="repo-readiness"><h2 class="section-title">Repo readiness - RA assessment</h2><p class="digest-detail"><a href="https://github.com/neka-nat/freecad-mcp" target="_blank" rel="noopener">neka-nat/freecad-mcp</a> - 2026-10-01: Trial with caveats. Maintenance: <a href="https://github.com/neka-nat/freecad-mcp/commits/main/" target="_blank" rel="noopener">commits</a> include a v0.1.25 version commit on 2026-09-24; <a href="https://github.com/neka-nat/freecad-mcp/releases" target="_blank" rel="noopener">GitHub Releases</a> has no published release entries, so do not conflate that commit with a GitHub release. Docs/setup: <a href="https://github.com/neka-nat/freecad-mcp/blob/main/docs/installation.md" target="_blank" rel="noopener">installation guide</a> specifies Python 3.12+ for the external server, FreeCAD add-on installation and a Windows FreeCAD 1.1 path; client support beyond its documented Claude Desktop quickstart needs validation. License: <a href="https://github.com/neka-nat/freecad-mcp/blob/main/LICENSE" target="_blank" rel="noopener">MIT license file</a>. Blockers: <a href="https://github.com/neka-nat/freecad-mcp/issues/140" target="_blank" rel="noopener">#140</a> reports Windows launch/setup friction and a documented client-specific workaround; <a href="https://github.com/neka-nat/freecad-mcp/issues/160" target="_blank" rel="noopener">#160</a> reports concurrent object calls producing inconsistent outcomes. These are reports, not a reproduction here. Prefer sequential small changes and inspect resulting objects.</p></section>
+<section id="try-next"><h2 class="section-title">Try next</h2><p class="digest-detail">If you want an AI-CAD trial, first verify your desktop client can launch this MCP server, then create a disposable measured box with one cutout in FreeCAD. Success means the saved model's dimensions and cutout match an independently measured reference, not merely that a render looks plausible. Do not use the generated caliper as a measuring instrument without independent calibration.</p></section>
+<section id="caveats"><h2 class="section-title">Caveats</h2><p class="digest-detail">No captions or direct video understanding were available; examples, demo outcomes, sequence and claims are from metadata alone. No precise timestamp links are asserted from chapter labels as evidence of observed content.</p><p class="digest-detail">The creator's <a href="https://ko-fi.com/s/7ce2634170" target="_blank" rel="noopener">companion setup guide</a> is a creator-hosted pay-what-you-want shop listing, not an independently audited manual. The site lists prompts and Windows steps; its content was not read. The benchmark comparison and ChatGPT custom connector compatibility remain unverified.</p><p class="digest-detail">No defensible Build this first recommendation: the available sources do not establish material, specific print settings, tolerances or an inspectable enclosure design.</p></section>
+<section id="links">
+  <h2 class="section-title">Useful links</h2>
+  <div class="links">
+    <a class="lk" href="https://github.com/neka-nat/freecad-mcp" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=github.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked original connector repository and installation docs.</span><span class="lk-dom">github.com</span></span></a>
+<a class="lk" href="https://www.freecad.org/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=freecad.org&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked official CAD project.</span><span class="lk-dom">freecad.org</span></span></a>
+<a class="lk" href="https://chatgpt.com/download" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=chatgpt.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked desktop download page.</span><span class="lk-dom">chatgpt.com</span></span></a>
+<a class="lk" href="https://docs.astral.sh/uv/getting-started/installation/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=docs.astral.sh&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked uv installation instructions.</span><span class="lk-dom">docs.astral.sh</span></span></a>
+<a class="lk" href="https://ko-fi.com/s/7ce2634170" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=ko-fi.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Creator-linked companion guide listing; optional, not required by the repository's own docs.</span><span class="lk-dom">ko-fi.com</span></span></a>
+  </div>
+</section>
+    </main>
+    <aside class="reservation-sidebar">
+      <div class="reservation-card">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--ink);">About this video</h3>
+        <div class="res-selectors" style="margin-bottom: 16px;">
+          <div class="res-cell">
+            <label>Video Title</label>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">I Gave GPT-6 Astra Control of FreeCAD (It Designs Like an Engineer)</div>
+          </div>
+          <div class="res-cell">
+            <label>Channel</label>
+            <div style="color: var(--ink);">Make Form</div>
+          </div>
+        </div>
+        <div class="recommendations-list" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+          
+        </div>
+        <a class="res-btn" href="https://www.youtube.com/watch?v=M5KOgtk9VfI" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Watch on YouTube
+        </a>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-bottom">
+    <div>© 2026 XOps Report • Generated Oct 01, 2026, 08:33 AM PT</div>
+  </div>
+</footer>
+<script>
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.callout-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+      document.querySelectorAll('.digest-detail').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.review-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.lk').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+    });
+  }
+</script>
+</body>
+</html>
