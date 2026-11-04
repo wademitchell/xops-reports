@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>What Claude Code Can Do That You Haven't Tried - Gui Ferreira - NDC Oslo 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --primary: #ff385c;
+    --primary-active: #e00b41;
+    --ink: #222222;
+    --body: #222222;
+    --muted: #6a6a6a;
+    --muted-soft: #929292;
+    --hairline: #dddddd;
+    --hairline-soft: #ebebeb;
+    --canvas: #ffffff;
+    --surface-soft: #f7f7f7;
+    --surface-strong: #f2f2f2;
+    --shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img, svg, video, iframe {
+    max-width: 100%;
+  }
+
+  p, h1, h2, h3, a, span, div {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Header */
+  .header {
+    height: 80px;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: var(--canvas);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #222222;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .logo strong {
+    font-weight: 800;
+    color: #000000;
+  }
+
+  .directory-link {
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-left: 20px;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .directory-link:hover {
+    border-color: var(--primary);
+    background: var(--surface-soft);
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    height: 48px;
+    padding: 0 8px 0 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-left: auto;
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    width: 180px;
+    padding-right: 8px;
+  }
+
+  .search-orb {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .search-orb svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+  }
+
+  /* Main Container */
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+  }
+
+  /* Title Block */
+  .title-block {
+    margin-bottom: 24px;
+  }
+
+  .title-block h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .title-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .title-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  .title-meta a {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  /* Photo Hero */
+  .hero {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 32px;
+    aspect-ratio: 2.8 / 1;
+    background: var(--surface-soft);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .guest-favorite-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--canvas);
+    border-radius: 9999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: lowercase;
+  }
+
+  .guest-favorite-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
+  }
+
+  .main-content, .reservation-sidebar, .author-info, .callout-body, .review-item, .review-rank, .lk span {
+    min-width: 0;
+  }
+
+  .main-content {
+    max-width: 100%;
+  }
+
+  /* Left Column */
+  .main-content section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .main-content section:first-of-type {
+    padding-top: 0;
+  }
+
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .author-info h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .author-info p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+  }
+
+  .candidate-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .candidate-table caption { text-align: left; color: var(--muted); margin-bottom: 12px; }
+  .candidate-table th, .candidate-table td { border: 1px solid var(--hairline); padding: 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; line-height: 1.6; }
+  .candidate-table thead { background: var(--surface-soft); }
+  @media (max-width: 600px) {
+    .candidate-table { font-size: 12px; }
+    .candidate-table th, .candidate-table td { padding: 6px; }
+  }
+  .digest-detail { line-height: 1.75; margin: 0 0 18px; }
+  #source-basis { color: var(--muted); font-size: 14px; }
+  #relevance { border-left: 3px solid var(--primary); padding-left: 20px; }
+
+  /* TL;DR Pull */
+  .tldr-text {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Key Callouts */
+  .section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .callouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .callout-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .callout-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--ink);
+    flex: none;
+  }
+
+  .callout-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+
+  .callout-body h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .callout-body p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Ranked List as Reviews */
+  .reviews-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .review-item {
+    padding: 24px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .review-rank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .review-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    display: grid;
+    place-items: center;
+  }
+
+  .review-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .review-desc {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .review-link img {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+  }
+
+  /* Links Grid */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 12px;
+  }
+
+  .lk {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 13px 14px;
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .lk:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  .lk img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 2px;
+    flex: none;
+    background: #fff;
+  }
+
+  .lk .lk-desc {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.45;
+    display: block;
+  }
+
+  .lk .lk-dom {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* Right Column (Sticky Reservation) */
+  .reservation-sidebar {
+    position: sticky;
+    top: 112px;
+  }
+
+  .reservation-card {
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .res-selectors {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .res-cell {
+    padding: 12px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .res-cell:last-child {
+    border-bottom: none;
+  }
+
+  .res-cell label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .res-cell div {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  .res-btn {
+    width: 100%;
+    height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .res-btn:hover {
+    background: var(--primary-active);
+  }
+
+  .res-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--hairline);
+    padding: 48px 40px;
+    margin-top: 80px;
+    font-size: 16px;
+    color: var(--muted);
+    background: var(--canvas);
+  }
+
+  .footer-bottom {
+    max-width: 1560px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  @media(max-width:960px){
+    body {
+      font-size: 16px;
+    }
+    .container {
+      padding: 18px 18px 56px;
+    }
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+    .reservation-sidebar {
+      position: static;
+    }
+    .header {
+      padding: 0 16px;
+      height: 64px;
+    }
+    .title-block h1 {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.15;
+    }
+    .author-row {
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .author-info h2 {
+      font-size: clamp(22px, 7vw, 30px);
+    }
+    .tldr-text {
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    .section-title {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.18;
+    }
+    .callout-item {
+      gap: 14px;
+    }
+    .callout-body p {
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    .links {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .footer {
+      padding: 32px 18px;
+    }
+    .footer-bottom {
+      display: block;
+    }
+    .directory-link {
+      margin-left: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    .search-bar span {
+      display: none;
+    }
+    .search-bar {
+      padding-left: 16px;
+    }
+  }
+
+  @media(max-width:430px){
+    .container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .directory-link {
+      font-size: 0;
+      padding: 8px 10px;
+    }
+    .directory-link::after {
+      content: 'Library';
+      font-size: 13px;
+    }
+    .search-bar {
+      display: none;
+    }
+    .hero {
+      aspect-ratio: 16 / 9;
+    }
+    .author-avatar {
+      display: none;
+    }
+    .callout-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="logo" href="https://wademitchell.github.io/xops-reports/" aria-label="XOps YouTube Digest Library">
+    <span>X<strong>|</strong>Ops</span>
+  </a>
+  <a class="directory-link" href="https://wademitchell.github.io/xops-reports/">All digests</a>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search this digest...">
+    <div class="search-orb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="title-block">
+    <h1>What Claude Code Can Do That You Haven't Tried - Gui Ferreira - NDC Oslo 2026</h1>
+    <div class="title-meta">
+      <a href="#key-ideas">Key ideas</a><span class="dot"></span><a href="#ranked">Items covered (not ranked)</a><span class="dot"></span><a href="#links">3 resources</a>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-img" style="background-image:url('https://i.ytimg.com/vi/P3TCZ2xrvbo/maxresdefault.jpg')"></div>
+    <div class="guest-favorite-badge">
+      <span></span>#ai
+    </div>
+  </div>
+  <div class="grid">
+    <main class="main-content">
+      <section id="tldr">
+  <div class="author-row" style="margin-bottom: 24px;">
+    <div class="author-info">
+      <h2>Video by NDC Conferences</h2>
+      <p>10 min read time</p>
+    </div>
+    <div class="author-avatar">🤖</div>
+  </div>
+  <p class="tldr-text">Gui Ferreira tours Claude Code beyond basic code generation: a lean setup, everyday shortcuts, reusable automation, and personal uses outside programming. His recurring advice is to keep instructions and conversation history focused, make feedback automatic, and tell the agent how to verify success. His final suggestion: run /insights to learn from your own usage.</p>
+</section>
+<section id="source-basis"><h2 class="section-title">Source basis</h2><p class="digest-detail">Full timestamped captions through the closing applause at 54:11, supplemented by full-video Gemini viewing notes for on-screen commands. Viewing notes are not a verbatim transcript. Official Claude Code, Obsidian, and Strava pages were independently checked for the resource links below.</p></section>
+<section id="key-ideas"><h2 class="section-title">Key ideas</h2><p class="digest-detail">Setup once: put instructions in the right place, avoid duplicate rules, protect sensitive files, and make the status line useful. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=261s" target="_blank" rel="noopener">4:21</a></p><p class="digest-detail">Daily workflow: refine plans before coding, undo dead ends, inspect context, and use shortcuts instead of repeatedly explaining the same thing. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=817s" target="_blank" rel="noopener">13:37</a></p><p class="digest-detail">Platform layer: package scripts into skills and use hooks to run checks automatically rather than relying on a reminder in a prompt. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2373s" target="_blank" rel="noopener">39:33</a></p><p class="digest-detail">Beyond code: the same file-reading and automation abilities can organize downloads, summarize work, connect notes, and process activity records. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2787s" target="_blank" rel="noopener">46:27</a></p></section>
+<section id="ranked">
+  <h2 class="section-title">Items covered (not ranked)</h2>
+  <div class="reviews-grid">
+    <div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Import another agent's setup</h3>
+    </div>
+  </div>
+  <p class="review-desc">Use /import with the source tool, such as codex, to bring over configuration rather than recreating it. Ferreira describes importing server connections, skills, and subagents. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=265s" target="_blank" rel="noopener">4:25</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Reuse files instead of copying rules</h3>
+    </div>
+  </div>
+  <p class="review-desc">In CLAUDE.md, import existing files with @RULES.md or @schema.json. His reason: duplicate instructions waste space and can drift apart. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=359s" target="_blank" rel="noopener">5:59</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Keep CLAUDE.md lean</h3>
+    </div>
+  </div>
+  <p class="review-desc">Keep broadly useful rules; move occasional tasks into skills and language-specific rules into .claude/rules/. Remove information the agent can discover from the repository. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=447s" target="_blank" rel="noopener">7:27</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Run /doctor</h3>
+    </div>
+  </div>
+  <p class="review-desc">Ferreira recommends it for installation checks and reviewing overloaded or duplicated project instructions. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=530s" target="_blank" rel="noopener">8:50</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Separate personal and team instructions</h3>
+    </div>
+  </div>
+  <p class="review-desc">Shared project rules belong in CLAUDE.md; personal project preferences in git-ignored CLAUDE.local.md; cross-project preferences in ~/.claude/CLAUDE.md. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=565s" target="_blank" rel="noopener">9:25</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Deny access to sensitive material</h3>
+    </div>
+  </div>
+  <p class="review-desc">Configure permissions.deny in .claude/settings.json for sensitive files and unwanted commands. His warning: debugging can lead the agent to inspect secrets unless access is restricted. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=635s" target="_blank" rel="noopener">10:35</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Customize the display</h3>
+    </div>
+  </div>
+  <p class="review-desc">Use /theme for appearance, then /statusline for a dashboard showing the project, branch, model, and context used. He considers the status line more useful than cosmetic changes. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=724s" target="_blank" rel="noopener">12:04</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Edit the plan directly</h3>
+    </div>
+  </div>
+  <p class="review-desc">Shift+Tab enters Plan Mode; Ctrl+G opens the plan in an editor. Save small corrections there instead of spending several chat turns requesting them. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=845s" target="_blank" rel="noopener">14:05</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Ask Claude to interview you</h3>
+    </div>
+  </div>
+  <p class="review-desc">Request questions until assumptions and tradeoffs are clear. Ferreira prefers discovering missing requirements before implementation. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=930s" target="_blank" rel="noopener">15:30</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Rewind a wrong turn</h3>
+    </div>
+  </div>
+  <p class="review-desc">Use Esc twice or /rewind to return to an earlier point and choose a different direction, rather than carrying a failed approach through the rest of the conversation. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1080s" target="_blank" rel="noopener">18:00</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Change model and effort deliberately</h3>
+    </div>
+  </div>
+  <p class="review-desc">Use /model for model selection and adjust reasoning effort for the task. He notes that planning and implementation do not necessarily need the same effort, even with the same model. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1115s" target="_blank" rel="noopener">18:35</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Use ultrathink for one hard prompt</h3>
+    </div>
+  </div>
+  <p class="review-desc">Ferreira describes it as raising reasoning effort for that turn, then returning to the previous level so you do not forget a lasting change. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1180s" target="_blank" rel="noopener">19:40</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Stash an unfinished prompt</h3>
+    </div>
+  </div>
+  <p class="review-desc">Ctrl+S puts your draft aside so you can answer an interruption, then restores it when pressed again. No notepad needed. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1261s" target="_blank" rel="noopener">21:01</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Ask a side question with /btw</h3>
+    </div>
+  </div>
+  <p class="review-desc">Get an answer while the main task continues, without adding that side discussion to its working conversation. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1291s" target="_blank" rel="noopener">21:31</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Inspect usage</h3>
+    </div>
+  </div>
+  <p class="review-desc">Check usage and model breakdowns, including models used by subagents, rather than assuming only the model you selected contributed to the session. He also likes cost visibility in the status line. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1337s" target="_blank" rel="noopener">22:17</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Check an empty session with /context</h3>
+    </div>
+  </div>
+  <p class="review-desc">Look for instructions, tools, and skills consuming space before you have asked anything. His example of 8% overhead is a reason to investigate, not a universal limit. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1414s" target="_blank" rel="noopener">23:34</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Compact at useful milestones</h3>
+    </div>
+  </div>
+  <p class="review-desc">Use /compact after a major implementation stage when the history still matters, or when repeated failed attempts clutter the conversation. He explicitly calls the proposed 40% context danger zone an opinion, not a proven threshold. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1480s" target="_blank" rel="noopener">24:40</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Audit memories</h3>
+    </div>
+  </div>
+  <p class="review-desc">Use /memory to find false assumptions, remove stale material, and promote genuinely useful recurring rules into CLAUDE.md. His example: an assistant mistakenly adopted a name from an article he asked it to summarize. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1598s" target="_blank" rel="noopener">26:38</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Run known shell commands directly</h3>
+    </div>
+  </div>
+  <p class="review-desc">Prefix a command with !, such as !npm test, when you already know what to run. This avoids asking the model to decide the command, but its output still enters the conversation: do not print secrets. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1704s" target="_blank" rel="noopener">28:24</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Inspect edits with /diff</h3>
+    </div>
+  </div>
+  <p class="review-desc">Open the file-change view inside the terminal instead of switching to another window to see what Claude changed. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1779s" target="_blank" rel="noopener">29:39</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Continue from your phone</h3>
+    </div>
+  </div>
+  <p class="review-desc">Start Remote Control for a long task, then monitor it or answer approval requests through the app away from your desk. Ferreira says this lets him take a walk while implementation runs. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1823s" target="_blank" rel="noopener">30:23</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Dictate with /voice</h3>
+    </div>
+  </div>
+  <p class="review-desc">Enable voice, then hold Space to speak. He finds that explaining a problem aloud clarifies it, but does not recommend dictation in an open office. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=1937s" target="_blank" rel="noopener">32:17</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Supply screenshots</h3>
+    </div>
+  </div>
+  <p class="review-desc">Paste or drag an image into the terminal and explain which visual details you want. His Mac shortcut is Ctrl+V, not Cmd+V. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2017s" target="_blank" rel="noopener">33:37</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Separate parallel work</h3>
+    </div>
+  </div>
+  <p class="review-desc">Use Git worktrees for simultaneous feature work, reviews, and bug fixes. Use /color and /rename to identify sessions; his examples are red for bugs, orange for refactoring, and blue for features. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2075s" target="_blank" rel="noopener">34:35</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Define a verifiable /goal</h3>
+    </div>
+  </div>
+  <p class="review-desc">State both the outcome and how to check it, such as a passing test that exercises an API and checks its generated PDF. Ferreira says the agent can then iterate without asking you about every step. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2181s" target="_blank" rel="noopener">36:21</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Reduce noise with /focus</h3>
+    </div>
+  </div>
+  <p class="review-desc">Hide intermediate chatter so returning to a session shows the request and final result more clearly. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2256s" target="_blank" rel="noopener">37:36</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Use the agents overview</h3>
+    </div>
+  </div>
+  <p class="review-desc">Start with claude agents, or use the desktop app, to see which agents are working, finished, or need your attention. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2326s" target="_blank" rel="noopener">38:46</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Automate feedback with hooks</h3>
+    </div>
+  </div>
+  <p class="review-desc">Run tests or a linter after edits through a PostToolUse hook. His reason: checks happen reliably and failures reach Claude before it declares the job done. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2395s" target="_blank" rel="noopener">39:55</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Package real capabilities as skills</h3>
+    </div>
+  </div>
+  <p class="review-desc">A skill can contain Python or PowerShell scripts, references, and instructions, not just a prompt. His example is turning a team's occasionally used troubleshooting scripts into reusable skills. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2490s" target="_blank" rel="noopener">41:30</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Try /batch and /simplify before reinventing them</h3>
+    </div>
+  </div>
+  <p class="review-desc">/batch divides large migrations across agents; /simplify reviews changes for duplication and unnecessary complexity. Ferreira especially likes /simplify. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2581s" target="_blank" rel="noopener">43:01</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Let /loop do repeated checking</h3>
+    </div>
+  </div>
+  <p class="review-desc">His example is /loop 5m check if the deploy finished, replacing manual refreshes of a deployment page. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2634s" target="_blank" rel="noopener">43:54</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Share project connections through .mcp.json</h3>
+    </div>
+  </div>
+  <p class="review-desc">Commit the project's MCP server definitions so colleagues can use and review the same tool connections, instead of relying on setup instructions elsewhere. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2667s" target="_blank" rel="noopener">44:27</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Use headless mode in scripts</h3>
+    </div>
+  </div>
+  <p class="review-desc">claude -p or --print runs a request and exits. Ferreira shows piping information into Claude and sending its answer onward as one step in an existing script. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2731s" target="_blank" rel="noopener">45:31</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Summarize work for reviews</h3>
+    </div>
+  </div>
+  <p class="review-desc">Ask what you have built, then package that retrospective into a skill for recurring reviews rather than reconstructing months of work manually. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2848s" target="_blank" rel="noopener">47:28</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Sort downloads before deciding what to delete</h3>
+    </div>
+  </div>
+  <p class="review-desc">Ferreira had Claude organize 1,626 items into categories, making disposable installers and screenshots easier to distinguish from documents needing human review. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=2917s" target="_blank" rel="noopener">48:37</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Work with an Obsidian notes folder</h3>
+    </div>
+  </div>
+  <p class="review-desc">Use Claude on the underlying Markdown files to summarize meetings, surface upcoming obligations, and connect research notes. He values keeping the files usable with other tools too. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=3000s" target="_blank" rel="noopener">50:00</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Connect records to a recurring planning skill</h3>
+    </div>
+  </div>
+  <p class="review-desc">His personal example uses one skill to copy Strava runs into Obsidian and another to draft the next week's running plan from that history. This is his anecdote, not evidence of medical safety. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=3121s" target="_blank" rel="noopener">52:01</a></p>
+  
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      
+      <h3>Finish with /insights</h3>
+    </div>
+  </div>
+  <p class="review-desc">If the talk offered nothing new, Ferreira's fallback recommendation is to inspect how you actually use Claude and where your workflow could improve. <a href="https://www.youtube.com/watch?v=P3TCZ2xrvbo&amp;t=3224s" target="_blank" rel="noopener">53:44</a></p>
+  
+</div>
+  </div>
+</section>
+<section id="caveats"><h2 class="section-title">Caveats</h2><p class="digest-detail">Commands are reported as shown or described in the talk, not tested here; availability can depend on your version. The captions mishear /batch as /patch; viewing notes identify the on-screen command as /batch. The talk's study figures are the speaker's claims, not independently verified findings.</p></section>
+<section id="links">
+  <h2 class="section-title">Useful links</h2>
+  <div class="links">
+    <a class="lk" href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=code.claude.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Claude Code official documentation, independently located.</span><span class="lk-dom">code.claude.com</span></span></a>
+<a class="lk" href="https://obsidian.md/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=obsidian.md&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Obsidian official site, independently located; the notes app used in his examples.</span><span class="lk-dom">obsidian.md</span></span></a>
+<a class="lk" href="https://www.strava.com/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=strava.com&amp;sz=64" alt="" loading="lazy"><span><span class="lk-desc">Strava official site, independently located; the activity source in his running example.</span><span class="lk-dom">strava.com</span></span></a>
+  </div>
+</section>
+    </main>
+    <aside class="reservation-sidebar">
+      <div class="reservation-card">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--ink);">About this video</h3>
+        <div class="res-selectors" style="margin-bottom: 16px;">
+          <div class="res-cell">
+            <label>Video Title</label>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">What Claude Code Can Do That You Haven't Tried - Gui Ferreira - NDC Oslo 2026</div>
+          </div>
+          <div class="res-cell">
+            <label>Channel</label>
+            <div style="color: var(--ink);">NDC Conferences</div>
+          </div>
+        </div>
+        <div class="recommendations-list" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+          
+        </div>
+        <a class="res-btn" href="https://www.youtube.com/watch?v=P3TCZ2xrvbo" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Watch on YouTube
+        </a>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-bottom">
+    <div>© 2026 XOps Report • Generated Nov 04, 2026, 08:06 AM PT</div>
+  </div>
+</footer>
+<script>
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.callout-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+      document.querySelectorAll('.digest-detail').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.review-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.lk').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+    });
+  }
+</script>
+</body>
+</html>
