@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Top 100 Games of All Time: 40-31</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --primary: #ff385c;
+    --primary-active: #e00b41;
+    --ink: #222222;
+    --body: #222222;
+    --muted: #6a6a6a;
+    --muted-soft: #929292;
+    --hairline: #dddddd;
+    --hairline-soft: #ebebeb;
+    --canvas: #ffffff;
+    --surface-soft: #f7f7f7;
+    --surface-strong: #f2f2f2;
+    --shadow: rgba(0, 0, 0, 0.02) 0px 0px 0px 1px, rgba(0, 0, 0, 0.04) 0px 2px 6px 0px, rgba(0, 0, 0, 0.1) 0px 4px 8px 0px;
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img, svg, video, iframe {
+    max-width: 100%;
+  }
+
+  p, h1, h2, h3, a, span, div {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  /* Header */
+  .header {
+    height: 80px;
+    border-bottom: 1px solid var(--hairline);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: var(--canvas);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: #222222;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -0.5px;
+  }
+
+  .logo strong {
+    font-weight: 800;
+    color: #000000;
+  }
+
+  .directory-link {
+    color: var(--ink);
+    text-decoration: none;
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    padding: 10px 16px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-left: 20px;
+    white-space: nowrap;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .directory-link:hover {
+    border-color: var(--primary);
+    background: var(--surface-soft);
+  }
+
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 9999px;
+    height: 48px;
+    padding: 0 8px 0 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-left: auto;
+  }
+
+  .search-bar input {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    width: 180px;
+    padding-right: 8px;
+  }
+
+  .search-orb {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .search-orb svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+  }
+
+  /* Main Container */
+  .container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 24px 24px 80px;
+  }
+
+  /* Title Block */
+  .title-block {
+    margin-bottom: 24px;
+  }
+
+  .title-block h1 {
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .title-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .title-meta .dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+
+  .title-meta a {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  /* Photo Hero */
+  .hero {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 32px;
+    aspect-ratio: 2.8 / 1;
+    background: var(--surface-soft);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .guest-favorite-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    background: var(--canvas);
+    border-radius: 9999px;
+    padding: 6px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: lowercase;
+  }
+
+  .guest-favorite-badge span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+
+  /* Grid Layout */
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 80px;
+    align-items: start;
+    width: 100%;
+  }
+
+  .main-content, .reservation-sidebar, .author-info, .callout-body, .review-item, .review-rank, .lk span {
+    min-width: 0;
+  }
+
+  .main-content {
+    max-width: 100%;
+  }
+
+  /* Left Column */
+  .main-content section {
+    padding: 32px 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .main-content section:first-of-type {
+    padding-top: 0;
+  }
+
+  .author-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .author-info h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.25;
+  }
+
+  .author-info p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  .author-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+  }
+
+  .candidate-table { width: 100%; table-layout: fixed; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+  .candidate-table caption { text-align: left; color: var(--muted); margin-bottom: 12px; }
+  .candidate-table th, .candidate-table td { border: 1px solid var(--hairline); padding: 12px; text-align: left; vertical-align: top; overflow-wrap: anywhere; line-height: 1.6; }
+  .candidate-table thead { background: var(--surface-soft); }
+  @media (max-width: 600px) {
+    .candidate-table { font-size: 12px; }
+    .candidate-table th, .candidate-table td { padding: 6px; }
+  }
+  .digest-detail { line-height: 1.75; margin: 0 0 18px; }
+  #source-basis { color: var(--muted); font-size: 14px; }
+  #relevance { border-left: 3px solid var(--primary); padding-left: 20px; }
+
+  /* TL;DR Pull */
+  .tldr-text {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* Key Callouts */
+  .section-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .callouts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .callout-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .callout-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--ink);
+    flex: none;
+  }
+
+  .callout-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+  }
+
+  .callout-body h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .callout-body p {
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* Ranked List as Reviews */
+  .reviews-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .review-item {
+    padding: 24px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+  }
+
+  .review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .review-rank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .review-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    display: grid;
+    place-items: center;
+  }
+
+  .review-item h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .review-desc {
+    font-size: 17px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .review-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  .review-link img {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+  }
+
+  /* Links Grid */
+  .links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+    gap: 12px;
+  }
+
+  .lk {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface-soft);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    padding: 13px 14px;
+    text-decoration: none;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+
+  .lk:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+  }
+
+  .lk img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-top: 2px;
+    flex: none;
+    background: #fff;
+  }
+
+  .lk .lk-desc {
+    color: var(--ink);
+    font-size: 15.5px;
+    line-height: 1.45;
+    display: block;
+  }
+
+  .lk .lk-dom {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* Right Column (Sticky Reservation) */
+  .reservation-sidebar {
+    position: sticky;
+    top: 112px;
+  }
+
+  .reservation-card {
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  }
+
+  .res-selectors {
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .res-cell {
+    padding: 12px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .res-cell:last-child {
+    border-bottom: none;
+  }
+
+  .res-cell label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .res-cell div {
+    font-size: 16px;
+    color: var(--muted);
+  }
+
+  .res-btn {
+    width: 100%;
+    height: 48px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+  }
+
+  .res-btn:hover {
+    background: var(--primary-active);
+  }
+
+  .res-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--hairline);
+    padding: 48px 40px;
+    margin-top: 80px;
+    font-size: 16px;
+    color: var(--muted);
+    background: var(--canvas);
+  }
+
+  .footer-bottom {
+    max-width: 1560px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+  }
+
+  @media(max-width:960px){
+    body {
+      font-size: 16px;
+    }
+    .container {
+      padding: 18px 18px 56px;
+    }
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 32px;
+    }
+    .reservation-sidebar {
+      position: static;
+    }
+    .header {
+      padding: 0 16px;
+      height: 64px;
+    }
+    .title-block h1 {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.15;
+    }
+    .author-row {
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .author-info h2 {
+      font-size: clamp(22px, 7vw, 30px);
+    }
+    .tldr-text {
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    .section-title {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.18;
+    }
+    .callout-item {
+      gap: 14px;
+    }
+    .callout-body p {
+      font-size: 17px;
+      line-height: 1.55;
+    }
+    .links {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .footer {
+      padding: 32px 18px;
+    }
+    .footer-bottom {
+      display: block;
+    }
+    .directory-link {
+      margin-left: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+    .search-bar span {
+      display: none;
+    }
+    .search-bar {
+      padding-left: 16px;
+    }
+  }
+
+  @media(max-width:430px){
+    .container {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+    .directory-link {
+      font-size: 0;
+      padding: 8px 10px;
+    }
+    .directory-link::after {
+      content: 'Library';
+      font-size: 13px;
+    }
+    .search-bar {
+      display: none;
+    }
+    .hero {
+      aspect-ratio: 16 / 9;
+    }
+    .author-avatar {
+      display: none;
+    }
+    .callout-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+</style>
+</head>
+<body>
+<header class="header">
+  <a class="logo" href="https://wademitchell.github.io/xops-reports/" aria-label="XOps YouTube Digest Library">
+    <span>X<strong>|</strong>Ops</span>
+  </a>
+  <a class="directory-link" href="https://wademitchell.github.io/xops-reports/">All digests</a>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Search this digest...">
+    <div class="search-orb">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="title-block">
+    <h1>Top 100 Games of All Time: 40-31</h1>
+    <div class="title-meta">
+      <a href="#ranked">Creator's ranking</a>
+    </div>
+  </div>
+  <div class="hero">
+    <div class="hero-img" style="background-image:url('https://i.ytimg.com/vi/ayj-m1Lf9bk/maxresdefault.jpg')"></div>
+    <div class="guest-favorite-badge">
+      <span></span>#board-games
+    </div>
+  </div>
+  <div class="grid">
+    <main class="main-content">
+      <section id="tldr">
+  <div class="author-row" style="margin-bottom: 24px;">
+    <div class="author-info">
+      <h2>Video by The Dice Tower</h2>
+      <p>9 min read time</p>
+    </div>
+    <div class="author-avatar">🤖</div>
+  </div>
+  <p class="tldr-text">Joey Evans, Wendy Yi, and Chris Yi each count down ten personal favorites, from #40 to #31. Joey’s choices often create memorable moments at the table, Wendy keeps coming back to games that let her build up to a big turn, and Chris likes games that make a familiar rule work in an unexpected way. Their #31 picks are Ethnos, Crusaders: Thy Will Be Done, and Azure, respectively.</p>
+</section>
+<section id="source-basis"><h2 class="section-title">Source basis</h2><p class="digest-detail">Full timestamped YouTube captions, including the final picks and wrap-up. The three hosts’ ranks are separate, not ties or a combined ranking. Game links are independently verified publisher or BoardGameGeek references, or the creator’s own review.</p></section>
+<section id="ranked">
+  <h2 class="section-title">Creator's ranking</h2>
+  <div class="reviews-grid">
+    <div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">40</span>
+      <h3>Joey: RUN</h3>
+    </div>
+  </div>
+  <p class="review-desc">A two-player chase with a fugitive using gadgets and shortcuts while law enforcement searches by helicopter. Joey says it feels like a movie chase; he and his wife played about six times in a row. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=444s" target="_blank" rel="noopener">7:24</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/368028/run" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">40</span>
+      <h3>Wendy: Incan Gold</h3>
+    </div>
+  </div>
+  <p class="review-desc">Keep exploring for gems or walk out with what you’ve found before a hazard wipes it out. Wendy loves the suspense of trying to leave at the last possible moment. BoardGameGeek lists it as Diamant. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=574s" target="_blank" rel="noopener">9:34</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/15512/diamant" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">40</span>
+      <h3>Chris: Tzolk’in: The Mayan Calendar</h3>
+    </div>
+  </div>
+  <p class="review-desc">Rotating gears change what workers can do the longer you leave them in place. Chris likes how tight it plays at two, though getting the timing wrong can leave you behind. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=676s" target="_blank" rel="noopener">11:16</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/126163/tzolkin-the-mayan-calendar" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">39</span>
+      <h3>Joey: Andromeda’s Edge</h3>
+    </div>
+  </div>
+  <p class="review-desc">Send out ships, develop technology, and regroup to get ships back. Joey likes the distinct factions and quick fights; it fell from his top ten because it’s hard to get to the table. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=839s" target="_blank" rel="noopener">13:59</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/358661/andromedas-edge" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">39</span>
+      <h3>Wendy: Concordia</h3>
+    </div>
+  </div>
+  <p class="review-desc">Play action cards from your hand, then spend a turn picking them back up. Wendy loves building up her options and that a production action can help other players, too. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=934s" target="_blank" rel="noopener">15:34</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/124361/concordia" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">39</span>
+      <h3>Chris: Lone Wolves</h3>
+    </div>
+  </div>
+  <p class="review-desc">In this two-player card game, the loser of a trick gets a bonus token. Chris likes that sometimes the token is worth more than winning the trick. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=1010s" target="_blank" rel="noopener">16:50</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/422374/lone-wolves" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">38</span>
+      <h3>Joey: Journeys Afar: The Ketsueki</h3>
+    </div>
+  </div>
+  <p class="review-desc">Gates connect worlds with different encounters and activities. Joey likes taking big risks, and dying costs points rather than ending the adventure. The link is to his separate Dice Tower review. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=1151s" target="_blank" rel="noopener">19:11</a></p>
+  <a class="review-link" href="https://dicetower.com/review/journeys-afar-ketsueki-review-sandiest-sandboxes" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=dicetower.com&amp;sz=64" alt="" loading="lazy">dicetower.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">38</span>
+      <h3>Wendy: Rolled West</h3>
+    </div>
+  </div>
+  <p class="review-desc">Roll dice for resources and mark the results on a sheet. Wendy likes being able to save resources between turns so she can plan a big turn instead of being stuck with a bad roll. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=1343s" target="_blank" rel="noopener">22:23</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/280041/rolled-west" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">38</span>
+      <h3>Chris: Vegetable Stock</h3>
+    </div>
+  </div>
+  <p class="review-desc">Everyone takes a card; the leftover card moves vegetable prices. Chris likes how much game fits on one card’s worth of rules and how quickly it plays at six. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=1415s" target="_blank" rel="noopener">23:35</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/328211/vegetable-stock" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">37</span>
+      <h3>Joey: The Lord of the Rings: Duel for Middle-earth</h3>
+    </div>
+  </div>
+  <p class="review-desc">A two-player card duel you can win through the Ring quest, alliances, or control of the map. Joey loves the components and different paths to victory. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=1525s" target="_blank" rel="noopener">25:25</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/421006/the-lord-of-the-rings-duel-for-middle-earth" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">37</span>
+      <h3>Wendy: Cozy Stickerville</h3>
+    </div>
+  </div>
+  <p class="review-desc">Build a village together with stickers and choices that branch as you play. Wendy keeps asking her family to replay it so they can see what happens if they build something different. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=1629s" target="_blank" rel="noopener">27:09</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/456440/cozy-stickerville" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">37</span>
+      <h3>Chris: Raiders of the North Sea</h3>
+    </div>
+  </div>
+  <p class="review-desc">Place one worker and pick up another to take two actions while preparing for raids. Chris finds that rhythm quick and distinctive, and praises the expansions. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=1723s" target="_blank" rel="noopener">28:43</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/170042/raiders-of-the-north-sea" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">36</span>
+      <h3>Joey: Terrorscape</h3>
+    </div>
+  </div>
+  <p class="review-desc">Survivors sneak through a mansion while a killer hunts them. Joey loves the tension of trying to repair the radio and that the big mansion helps conceal movement rather than just looking impressive. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=1885s" target="_blank" rel="noopener">31:25</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/371433/terrorscape" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">36</span>
+      <h3>Wendy: Viticulture Essential Edition</h3>
+    </div>
+  </div>
+  <p class="review-desc">Assign workers through the seasons to grow grapes, age wine, and fill orders. Wendy has played Essential Edition most, loves the Tuscany expansion, and still prefers this to other games she’s tried about aging drinks. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=1977s" target="_blank" rel="noopener">32:57</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/183394/viticulture-essential-edition" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">36</span>
+      <h3>Chris: Golem</h3>
+    </div>
+  </div>
+  <p class="review-desc">Choose actions by drafting marbles while juggling several connected tracks. Chris found it demanding to learn but loved how the different systems fit together. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=2088s" target="_blank" rel="noopener">34:48</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/298383/golem" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">35</span>
+      <h3>Joey: Stonespine Architects</h3>
+    </div>
+  </div>
+  <p class="review-desc">Draft rooms, connect paths, and try to fit a dungeon blueprint. It’s Joey’s favorite Roll Player game because it’s quick to teach and rewards changing plans when the rooms you need don’t show up. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=2321s" target="_blank" rel="noopener">38:41</a></p>
+  <a class="review-link" href="https://thunderworksgames.com/products/stonespine-architects-board-game" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=thunderworksgames.com&amp;sz=64" alt="" loading="lazy">thunderworksgames.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">35</span>
+      <h3>Wendy: Foundations of Rome</h3>
+    </div>
+  </div>
+  <p class="review-desc">Acquire adjacent plots so you can replace small buildings with bigger ones. Wendy loves piecing the plots together and finds the game surprisingly quick to teach despite the giant box. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=2344s" target="_blank" rel="noopener">39:04</a></p>
+  <a class="review-link" href="https://www.arcanewonders.com/product/foundations-of-rome/" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=arcanewonders.com&amp;sz=64" alt="" loading="lazy">arcanewonders.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">35</span>
+      <h3>Chris: The Crew</h3>
+    </div>
+  </div>
+  <p class="review-desc">Players work together to win specific tricks in a series of missions. Chris finds the original more approachable and <a href="https://boardgamegeek.com/boardgame/324856/the-crew-mission-deep-sea" target="_blank" rel="noopener">Mission Deep Sea</a> zanier; he enjoys them equally and counts either as the pick. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=2567s" target="_blank" rel="noopener">42:47</a></p>
+  <a class="review-link" href="https://thamesandkosmos.com/products/the-crew" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=thamesandkosmos.com&amp;sz=64" alt="" loading="lazy">thamesandkosmos.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">34</span>
+      <h3>Joey: SETI: Search for Extraterrestrial Intelligence</h3>
+    </div>
+  </div>
+  <p class="review-desc">Time your missions around a rotating solar system as alien discoveries introduce new possibilities. Joey loves how the moving board makes the space theme matter to his plans. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=2681s" target="_blank" rel="noopener">44:41</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/418059/seti-search-for-extraterrestrial-intelligence" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">34</span>
+      <h3>Wendy: Saint Petersburg</h3>
+    </div>
+  </div>
+  <p class="review-desc">Different cards pay out in different phases, so you have to budget until your next payday. Wendy dislikes the art but loves squeezing more out of each purchase. The link is to the original game. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=2861s" target="_blank" rel="noopener">47:41</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/9217/saint-petersburg" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">34</span>
+      <h3>Chris: Pandemic Legacy: Season 1</h3>
+    </div>
+  </div>
+  <p class="review-desc">A cooperative campaign where decisions carry over between sessions. Chris singles out Season 1 to represent the Pandemic family; he says playing the campaigns made his group closer because they had to talk through hard decisions. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=3022s" target="_blank" rel="noopener">50:22</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/161936/pandemic-legacy-season-1" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">33</span>
+      <h3>Joey: Light Speed: Arena</h3>
+    </div>
+  </div>
+  <p class="review-desc">Aim ship tiles in real time, then photograph the layout so the app can resolve the battle. Joey says even a friend who normally avoids games kept asking for rematches. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=3207s" target="_blank" rel="noopener">53:27</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/400498/light-speed-arena" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">33</span>
+      <h3>Wendy: Skara Brae</h3>
+    </div>
+  </div>
+  <p class="review-desc">Manage resources to build up what you can do in a prehistoric settlement. Wendy played three times the week she got it; going back to teach it reminded her how much she liked it. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=3403s" target="_blank" rel="noopener">56:43</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/408636/skara-brae" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">33</span>
+      <h3>Chris: Ichor</h3>
+    </div>
+  </div>
+  <p class="review-desc">Move gods or monsters in straight lines, leaving discs behind. Chris loves the simple rules and different powers, especially when replaying the same setup with sides swapped. It rose from #80 to #33. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=3489s" target="_blank" rel="noopener">58:09</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/420915/ichor" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">32</span>
+      <h3>Joey: Forest Shuffle</h3>
+    </div>
+  </div>
+  <p class="review-desc">Build a forest of cards that score in combination. Joey likes discovering new combinations and says the expansions, including the river cards in Smoky Mountains, give him more to explore. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=3644s" target="_blank" rel="noopener">1:00:44</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/391163/forest-shuffle" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">32</span>
+      <h3>Wendy: Three Sisters: Harvest Edition</h3>
+    </div>
+  </div>
+  <p class="review-desc">Grow a garden on a score sheet where one action can set off several more. Wendy loves chaining those bonuses, trying different maps, and seeing the companion-planting theme come through. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=3748s" target="_blank" rel="noopener">1:02:28</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/436127/three-sisters-harvest-edition" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">32</span>
+      <h3>Chris: Bärenpark</h3>
+    </div>
+  </div>
+  <p class="review-desc">Fit differently shaped tiles together to build a bear park. Chris calls it one of the best games of that type but doesn’t elaborate on why in this segment. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=3865s" target="_blank" rel="noopener">1:04:25</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/219513/barenpark" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">31</span>
+      <h3>Joey: Ethnos</h3>
+    </div>
+  </div>
+  <p class="review-desc">Play bands of cards to control regions, knowing opponents can use what you discard. Joey prefers the original’s fantasy powers, readable map, and direct competition for territory. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=4004s" target="_blank" rel="noopener">1:06:44</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/206718/ethnos" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">31</span>
+      <h3>Wendy: Crusaders: Thy Will Be Done</h3>
+    </div>
+  </div>
+  <p class="review-desc">Move tokens around a wheel to choose actions, then build structures that strengthen different parts of your strategy. Wendy has enjoyed several approaches and loved her play of the expansion. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=4103s" target="_blank" rel="noopener">1:08:23</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/170624/crusaders-thy-will-be-done" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+<div class="review-item">
+  <div class="review-header">
+    <div class="review-rank">
+      <span class="review-num">31</span>
+      <h3>Chris: Azure</h3>
+    </div>
+  </div>
+  <p class="review-desc">Spend cards to place stones, with stones making later placements cheaper. Chris likes building that momentum and says the board stays easy to read without making decisions shallow. It debuts at #31. <a href="https://www.youtube.com/watch?v=ayj-m1Lf9bk&amp;t=4219s" target="_blank" rel="noopener">1:10:19</a></p>
+  <a class="review-link" href="https://boardgamegeek.com/boardgame/447254/azure" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?domain=boardgamegeek.com&amp;sz=64" alt="" loading="lazy">boardgamegeek.com</a>
+</div>
+  </div>
+</section>
+    </main>
+    <aside class="reservation-sidebar">
+      <div class="reservation-card">
+        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--ink);">About this video</h3>
+        <div class="res-selectors" style="margin-bottom: 16px;">
+          <div class="res-cell">
+            <label>Video Title</label>
+            <div style="font-weight: 500; font-size: 13px; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Top 100 Games of All Time: 40-31</div>
+          </div>
+          <div class="res-cell">
+            <label>Channel</label>
+            <div style="color: var(--ink);">The Dice Tower</div>
+          </div>
+        </div>
+        <div class="recommendations-list" style="margin-bottom: 20px; display: flex; flex-direction: column;">
+          
+        </div>
+        <a class="res-btn" href="https://www.youtube.com/watch?v=ayj-m1Lf9bk" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Watch on YouTube
+        </a>
+      </div>
+    </aside>
+  </div>
+</div>
+<footer class="footer">
+  <div class="footer-bottom">
+    <div>© 2026 XOps Report • Generated Nov 20, 2026, 12:49 PM PT</div>
+  </div>
+</footer>
+<script>
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.callout-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+      document.querySelectorAll('.digest-detail').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.review-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'block' : 'none';
+      });
+      document.querySelectorAll('.lk').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? 'flex' : 'none';
+      });
+    });
+  }
+</script>
+</body>
+</html>
